@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage{shyne}
+
+% document format
+\topmargin 0in
+\oddsidemargin 0in
+\evensidemargin 0in
+\headheight 0in
+\headsep 0in
+\topskip 0in
+\textheight 9in
+\textwidth 6.5in
+\linespread{1.3}
+
+\begin{document}
+
+\begin{flushleft}
+\section*{Group Work - Week 3}
+
+\paragraph{1} A new blood test for a particular enzyme is being tested as screening test for lung cancer. Subjects aged 35 -50 without a history of lung cancer were given the blood test and then given a definitive diagnosis by chest scan and biopsy if necessary. The results are below.\\ \medskip
+{\centering
+\begin{tabular}{ r| c c}
+& \multicolumn{2}{c}{Screening test}\\
+Diagnosis & Positive & Negative\\
+\hline
+ Cancer &  68  &  20  \\
+ No cancer  & 1192   &  2578 \\
+\end{tabular}
+\par}
+
+
+\begin{enumalpha}
+\item What is the sensitivity of the screening test? That is, what is $P(\text{positive test} \mid \text{has cancer})$?\\
+\medskip
+$\ds \bv{P(\text{positive test} \mid \text{has cancer}) = \frac{68}{68+20} = 0.773}$
+\vspace{.75in}
+
+\item What is the probability of having cancer if the screen test is positive?\\
+\medskip
+$\ds \bv{P(\text{has cancer} \mid \text{positive test}) = \frac{68}{68+1192} = 0.054}$
+\vspace{.75in}
+
+\item Suppose you learn that 12\% of people age 35 - 50 smoke and that 79\% of lung cancer patients are (or were) smokers. Smoking is independent of the screening test results. What is the probability of having cancer if a patients has a positive screening test and is a smoker?\\
+\medskip
+$\bv A$\bt{ = Have cancer after a positive test, }$\bv{P(A) = 0.054}$\\
+$\bv B$\bt{ = Smoker, }$\bv{P(B) = 0.12}$\\
+$\bv{B \mid A}$\bt{ = smoker given has cancer, }$\bv{P(B \mid A) = 0.79}$\\ \medskip
+$\ds \bv{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)} = \frac{0.054 \times 0.79}{0.12} = 0.356}$
+\end{enumalpha}
+
+\newpage
+\paragraph{2} For each of the following scenarios, identify the type of study, the sampling method, and, if study is an experiment, which elements of good experimental studies are being utilized.
+
+\begin{enumalpha}
+\item The Iowa Women's Health Study mailed health and diet questionnaires to nearly 100,000 Iowa women aged 55-69 (identified through driver's license registry). The 41,837 women who returned the initial survey were mailed 6 more questionnaires over the next 22 years. Cancer incidence and mortality were tracked through the State Health Registry of Iowa.\\ \medskip
+\bt{This is a prospective observational study. It utilizes cluster sampling (selected a state then attempt to sample all relevant subjects within that state).}
+\vspace{0.5in}
+
+\item A sample of about 500 elderly hearing aid users selected from 10 randomly selected nursing home and senior living centers. They were randomly assigned to receive either audiologist adjusted hearing aids with only volume controls or hearing aids with controls that allowed the user to fine tune settings. After 6 months, severals different measures of hearing aid satisfaction and social engagement were collected.\\ \medskip
+\bt{This is a experiment, with control, replication and randomization. It utilizes multistage sampling, cluster then simple random sample.}
+\vspace{0.5in}
+
+\item The ACCOMPLISH trial sought to compare a thiazide with a calcium channel blocker (CCB) as combination therapy with an angiotensin-converting-enzyme (ACE) inhibitor in reducing cardiovascular events in patients with hypertension. A total of 11,506 patients from 548 centres in the United States, Sweden, Norway, Denmark, and Finland were randomized to receive either 1) benazepril plus amlodipine or 2) benazepril plus HCTZ. Neither patients nor their caregivers were aware of which treatment group they were in. The primary endpoint was a composite of cardiovascular events or death from cardiovascular causes. \\ \medskip
+\bt{This is an experimental study, with control, replication, randomization and blinding. It likely employed a convenience sample.}
+\vspace{0.5in}
+
+\item A study examined health records of over 500,000 children born in Denmark from 1991 to 1998. Researchers looked MMR vaccination status at 15 months of age and autism diagnosis. No association between vaccination status or timing of vaccinations and autism was found.\\ \medskip
+\bt{This is a retrospective observational study. It utilizes a census.}
+
+\end{enumalpha} 
+\end{flushleft}
+\end{document}

@@ -1,0 +1,441 @@
+---
+title: "Week 11: Correlation and regression with paired data"
+author: 'Stat 201: Statistics I'
+date: "April 21, 2019"
+output: 
+    beamer_presentation:
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      fig.width = 4, fig.height = 1.5, fig.align = "center")
+
+library(ggplot2)
+
+set.seed(42)
+```
+
+```{r}
+normal.plot <- function(x = NULL,
+                        x.ticks.sd = (-1:1)*2,
+                        mu = 0, sigma = 1,
+                        less.x = NULL,
+                        less.x.2 = NULL,
+                        greater.x = NULL,
+                        greater.x.2 = NULL,
+                        between.x = NULL,
+                        fill.color = "cadetblue",
+                        less.color = NULL,
+                        less.color.2 = NULL,
+                        greater.color = NULL,
+                        greater.color.2 = NULL,
+                        between.color = NULL) {
+    if (is.null(x)){
+        # If no x values given, default to -3.1 to 3.1 SDs
+        l.bound <- mu - 3 * sigma
+        u.bound <- mu + 3 * sigma
+        
+        x <- seq(l.bound, u.bound, length=500)
+    } 
+
+    x.ticks <- mu + x.ticks.sd * sigma
+    x.ticks <- x.ticks[x.ticks>=min(x) & x.ticks<=max(x)]        
+    
+    # The density function for specified distribution
+    dense.func <- function(x){
+        dnorm(x, mean=mu, sd=sigma)
+    }
+    
+    # y values are the density curve
+    y <- dense.func(x)
+    
+    # Data frame for the plot
+    plot.df <- data.frame(x=x, y=y)
+    
+    # Define the plot
+    g <- ggplot(plot.df, aes(x=x, y=y))
+    
+    # Display range less than value?
+    if (!is.null(less.x)){
+        if (is.null(less.color)){
+            less.color <- fill.color
+        }
+        
+        area.less.x <- c(x[x<= less.x], less.x)
+        plot.less.df <- data.frame(x=area.less.x, y=dense.func(area.less.x))
+        
+        g <- g + geom_area(data=plot.less.df, fill=less.color, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x, y=0, xend=less.x, yend=dense.func(less.x)),
+                              color=less.color)
+        
+        x.ticks <- c(x.ticks, less.x)
+    }
+    
+    if (!is.null(less.x.2)){
+        if (is.null(less.color.2)){
+            less.color.2 <- fill.color
+        }
+        
+        area.less.x.2 <- c(x[x<= less.x.2], less.x.2)
+        plot.less.df.2 <- data.frame(x=area.less.x.2, y=dense.func(area.less.x.2))
+        
+        g <- g + geom_area(data=plot.less.df.2, fill=less.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x.2, y=0, xend=less.x.2, yend=dense.func(less.x.2)),
+                              color=less.color.2)
+        
+        x.ticks <- c(x.ticks, less.x.2)
+    }
+
+    # Display range greater than value?
+    if (!is.null(greater.x)){
+        if (is.null(greater.color)){
+            greater.color <- fill.color
+        }
+
+        area.greater.x <- c(greater.x, x[x >= greater.x])
+        plot.greater.df <- data.frame(x=area.greater.x, y=dense.func(area.greater.x))
+
+        g <- g + geom_area(data=plot.greater.df, fill=greater.color, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x, y=0, 
+                                  xend=greater.x, yend=dense.func(greater.x)),
+                              color=greater.color)
+        
+        x.ticks <- c(x.ticks, greater.x)
+    }
+
+    if (!is.null(greater.x.2)){
+        if (is.null(greater.color.2)){
+            greater.color.2 <- fill.color
+        }
+
+        area.greater.x.2 <- c(greater.x.2, x[x >= greater.x.2])
+        plot.greater.df.2 <- data.frame(x=area.greater.x.2, y=dense.func(area.greater.x.2))
+
+        g <- g + geom_area(data=plot.greater.df.2, fill=greater.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x.2, y=0, 
+                                  xend=greater.x.2, yend=dense.func(greater.x.2)),
+                              color=greater.color.2)
+        
+        x.ticks <- c(x.ticks, greater.x.2)
+    }
+
+    # Display range between values?
+    if (!is.null(between.x)){
+        if (is.null(between.color)){
+            between.color <- fill.color
+        }
+
+        area.between.x <- c(between.x[1], 
+                            x[x >= between.x[1] & x <= between.x[2]],
+                            between.x[2])
+        plot.between.df <- data.frame(x=area.between.x, y=dense.func(area.between.x))
+
+        g <- g + geom_area(data=plot.between.df, fill=between.color, alpha=.6)
+        g <- g + geom_segment(aes(x=between.x[1], y=0, 
+                                  xend=between.x[1], yend=dense.func(between.x[1])),
+                              color=between.color)
+        g <- g + geom_segment(aes(x=between.x[2], y=0, 
+                                  xend=between.x[2], yend=dense.func(between.x[2])),
+                              color=between.color)
+        
+        x.ticks <- c(x.ticks, between.x)
+    }
+
+    x.ticks <- sort(x.ticks)
+    x.ticks.labels <- paste(round(x.ticks,2))
+                            
+    # Draw density curve
+    g <- g + geom_line(size=1)
+    g <- g + theme_bw() + xlab("") + ylab("Density")
+    g <- g + scale_x_continuous(breaks=sort(x.ticks), minor_breaks = NULL,
+                                labels=x.ticks.labels)
+    
+    g
+}
+
+binomial.plot <- function(x = NULL,
+                        x.ticks = NULL,
+                        n = 10, p = 0.5,
+                        less.x = NULL,
+                        less.x.2 = NULL,
+                        greater.x = NULL,
+                        greater.x.2 = NULL,
+                        between.x = NULL,
+                        fill.color = "cadetblue",
+                        less.color = NULL,
+                        less.color.2 = NULL,
+                        greater.color = NULL,
+                        greater.color.2 = NULL,
+                        between.color = NULL) {
+    if (is.null(x)){
+        # If no x values given, default to 0 to n
+        l.bound <- - 0.51
+        u.bound <- n + 0.5 
+        
+        x <- seq(l.bound, u.bound, length=500)
+    } 
+    
+    if (is.null(x.ticks)){
+        x.ticks <- seq(round(min(x+0.01)), round(max(x)), by=2)
+    }
+
+    # The density function for specified distribution
+    dense.func <- function(x){
+        dbinom(round(x), size=n, prob=p)
+    }
+    
+    # y values are the density curve
+    y <- dense.func(x)
+    
+    # Data frame for the plot
+    plot.df <- data.frame(x=x, y=y)
+    
+    # Define the plot
+    g <- ggplot(plot.df, aes(x=x, y=y))
+    
+    # Display range less than value?
+    if (!is.null(less.x)){
+        if (is.null(less.color)){
+            less.color <- fill.color
+        }
+
+        area.less.x <- x[x<= less.x + 0.5]
+        plot.less.df <- data.frame(x=area.less.x, y=dense.func(area.less.x))
+        
+        g <- g + geom_area(data=plot.less.df, fill=less.color, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x+0.5, y=0, 
+                                  xend=less.x+0.5, yend=dense.func(less.x+0.5)),
+                              color=less.color)
+        
+        x.ticks <- c(x.ticks, less.x)
+    }
+    
+
+    if (!is.null(less.x.2)){
+        if (is.null(less.color.2)){
+            less.color.2 <- fill.color
+        }
+
+        area.less.x.2 <- x[x<= less.x.2 + 0.5]
+        plot.less.df.2 <- data.frame(x=area.less.x.2, y=dense.func(area.less.x.2))
+        
+        g <- g + geom_area(data=plot.less.df.2, fill=less.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x.2+0.5, y=0, 
+                                  xend=less.x.2+0.5, yend=dense.func(less.x.2+0.5)),
+                              color=less.color.2)
+        
+        x.ticks <- c(x.ticks, less.x.2)
+    }
+
+    # Display range greater than value?
+    if (!is.null(greater.x)){
+        if (is.null(greater.color)){
+            greater.color <- fill.color
+        }
+
+        area.greater.x <- x[x >= greater.x + 0.5]
+        plot.greater.df <- data.frame(x=area.greater.x, y=dense.func(area.greater.x))
+
+        g <- g + geom_area(data=plot.greater.df, fill=greater.color, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x + 0.5, y=0, 
+                                  xend=greater.x + 0.5, yend=dense.func(greater.x+0.5)),
+                              color=greater.color)
+        
+        x.ticks <- c(x.ticks, greater.x)
+    }
+
+    if (!is.null(greater.x.2)){
+        if (is.null(greater.color.2)){
+            greater.color.2 <- fill.color
+        }
+
+        area.greater.x.2 <- x[x >= greater.x.2 + 0.5]
+        plot.greater.df.2 <- data.frame(x=area.greater.x.2, y=dense.func(area.greater.x.2))
+
+        g <- g + geom_area(data=plot.greater.df.2, fill=greater.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x.2 + 0.5, y=0, 
+                                  xend=greater.x.2 + 0.5, yend=dense.func(greater.x.2+0.5)),
+                              color=greater.2.color)
+        
+        x.ticks <- c(x.ticks, greater.x.2)
+    }
+
+    # Display range between values?
+    if (!is.null(between.x)){
+        if (is.null(between.color)){
+            between.color <- fill.color
+        }
+
+        area.between.x <- c(between.x[1] + 0.5, 
+                            x[x > between.x[1] + 0.5 & x <= between.x[2] + 0.5])
+        plot.between.df <- data.frame(x=area.between.x, y=dense.func(area.between.x))
+
+        g <- g + geom_area(data=plot.between.df, fill=between.color, alpha=.6)
+        g <- g + geom_segment(aes(x=between.x[1] + 0.5, y=0, 
+                                  xend=between.x[1] + 0.5, yend=dense.func(between.x[1] + 0.5)),
+                              color=between.color)
+        g <- g + geom_segment(aes(x=between.x[2] + 0.5, y=0, 
+                                  xend=between.x[2] + 0.5, yend=dense.func(between.x[2]+0.5)),
+                              color=between.color)
+        
+        x.ticks <- c(x.ticks, between.x)
+    }
+
+    x.ticks <- sort(x.ticks)
+    x.ticks.labels <- paste(round(x.ticks,4))
+                            
+    # Draw density curve
+    g <- g + geom_step(size=1, direction = "vh")
+    g <- g + theme_bw() + xlab("") + ylab("Density")
+    g <- g + scale_x_continuous(breaks=sort(x.ticks), minor_breaks = NULL,
+                                labels=x.ticks.labels)
+    
+    g
+}
+
+```
+
+```{r}
+hgts <- read.csv("../../Data/metro_hgts_pop.csv")
+s <- sample(hgts$x, 40)
+```
+
+## Plotting paired data
+
+Paired data is often first examined with a scatterplot. This can be easily done by passing to the `plot` function a pair of equal length vectors.
+
+- Plot the relationship between petal length and petal width in the built-in dataset `iris`.
+
+    ```{r, echo=T, eval=F}
+    plot(iris$Petal.Length, iris$Petal.Width)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T, fig.width=3, fig.height=1.85}
+    op <- par(no.readonly = TRUE)
+    par(mar = c(5.1, 4.2, 1, 1), cex=0.5, mex=0.65)
+    plot(iris$Petal.Length, iris$Petal.Width)
+    par(op)
+    ```
+
+## Correlation
+
+Correlation between two numeric vectors can be found with the `cor` function.
+
+- Find the correlation between petal length and petal width.
+
+    ```{r, echo=T, eval=F}
+    cor(iris$Petal.Length, iris$Petal.Width)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    cor(iris$Petal.Length, iris$Petal.Width)
+    ```
+
+## Correlation tests
+
+A test of the population correlation $\rho$ can be conducted with the `cor.test` function.
+
+- Test whether the population correlation between petal length and petal width is zero or not.
+
+    ```{r, echo=T, eval=F}
+    cor.test(iris$Petal.Length, iris$Petal.Width)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    cor.test(iris$Petal.Length, iris$Petal.Width)
+    ```
+
+## Linear models
+
+Regression analysis is conducted by defining a model with the `lm` ("linear model") function. A model is defined by a **formula** in the form:
+\vspace{-.2in}
+\begin{center} $y \sim x$ \end{center}
+\vspace{-.2in}
+
+where $y$ is a vector of values for the response variable and $x$ is an equal length vector of values of the predictor variable. Note the use of a tilde ("~").
+
+- Define a linear model of the relationship between petal length and petal width, with petal width as the response variable.
+
+    ```{r, echo=T, eval=F}
+    petal.lm <- lm(iris$Petal.Width ~ iris$Petal.Length)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    petal.lm <- lm(iris$Petal.Width ~ iris$Petal.Length)
+    ```
+    
+    \vspace{.15in}
+    or
+    
+    ```{r, echo=T, eval=F}
+    petal.lm <- lm(Petal.Width ~ Petal.Length, data=iris)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    petal.lm <- lm(Petal.Width ~ Petal.Length, data=iris)
+    ```
+    
+## Regression coefficients
+
+The estimated regression coefficients are found in the output of the `lm` function.
+
+- Find the estimated regression equation for the relationship between petal length and petal width.
+
+    ```{r, echo=T, eval=F}
+    petal.lm <- lm(Petal.Width ~ Petal.Length, data=iris)
+    petal.lm
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    petal.lm <- lm(Petal.Width ~ Petal.Length, data=iris)
+    petal.lm
+    ```
+
+    - The regression equation is: $\hat y = -0.3631 + 0.4158 x$
+    
+## More regression results
+
+Often, we want more information about a regression model than just the equation. By passing the linear model to the `summary` function, we get fuller results.
+
+- The first part of the summary output lists the formula used to define the model and information about residuals (errors) which we do not concern ourselves with in theis class.
+    ```{r, echo=T, eval=F}
+    summary(petal.lm)
+    ```
+
+    \includegraphics[width=5in]{../images/wk11_R_lm_out_pt1}
+
+## More regression results, cont.
+
+- The second part of the summary output gives information about the estimated coeffiecients, including the coefficients themselves and the t-score and p-value for hypothesis tests on whether the parameters are zero or not.
+
+    \vspace{.15in}
+    \includegraphics[width=5in]{../images/wk11_R_lm_out_pt2}
+
+## More regression results, cont.
+
+- The final part of the summary output has information about the overall fit of the regression model. In particular, the coefficient of determination $R^2$ is designated by `Multiple R-squared`.
+    
+    \vspace{.15in}
+    \includegraphics[width=5in]{../images/wk11_R_lm_out_pt3}
+
+## Adding regression line to scatterplot
+
+A regression line can be added to a scatterplot by passing the linear model to the function `abline`. Note: `abline` can only be used after a `plot` function call.
+
+- Add regression line to iris petal plot.
+    
+    ```{r, echo=T, eval=F}
+    plot(iris$Petal.Length, iris$Petal.Width)
+    abline(petal.lm)
+    ```
+
+    ```{r, echo=F, eval=T, fig.width=3, fig.height=1.85}
+    op <- par(no.readonly = TRUE)
+    par(mar = c(5.1, 4.2, 1, 1), cex=0.5, mex=0.65)
+    plot(iris$Petal.Length, iris$Petal.Width)
+    abline(petal.lm)
+    par(op)
+    ```
+

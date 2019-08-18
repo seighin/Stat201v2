@@ -1,0 +1,182 @@
+---
+title: "Homework - Week 4 (solution)"
+author: "Michael Shyne"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+1. Consider the builtin dataset `iris`.
+
+    a. What is the structure of the `iris` data frame?
+    
+        ```{r}
+        str(iris)
+        ```
+    
+    b. Create a histogram of the `Sepal.Width` variable.
+    
+        ```{r}
+        hist(iris$Sepal.Width)
+        ```
+    
+    c. Create a histogram of the `Petal.Width` variable.
+
+        ```{r}
+        hist(iris$Petal.Width)
+        ```
+
+    d. For both histograms, does the data appear normally distributed? Are they skewed?
+    
+        **The sepal width histogram is approximately normal, with a slight right-skew.**
+        
+        **The petal width histogram is not normal. The data appear right-skewed, but since the distribution is bimodal defining a skew is not really appropriate.**
+    
+    e. For both histograms, does it appear that the data come from more than one populations?
+    
+        **The sepal width histogram does not show any evidence of coming from two populations.**
+        
+        **The petal width histogram is bimodal, suggesting the data come from two populations.**
+    
+    f. What is the mean and median of `Sepal.Width`? What is the variance and standard deviation?
+    
+        **Mean:**
+        ```{r}
+        mean(iris$Sepal.Width)
+        ```
+        
+        **Variance and standard deviation:**
+        ```{r}
+        var(iris$Sepal.Width)
+        sd(iris$Sepal.Width)
+        ```
+    
+    g. What is the mean and median of `Petal.Width`? What is the variance and standard deviation?
+
+        **Mean:**
+        ```{r}
+        mean(iris$Petal.Width)
+        ```
+        
+        **Variance and standard deviation:**
+        ```{r}
+        var(iris$Petal.Width)
+        sd(iris$Petal.Width)
+        ```
+    
+    
+2. Consider the builtin dataset `trees`. 
+
+    a. What is the structure of the `trees` data frame?
+        
+        ```{r}
+        str(trees)
+        ```
+        
+    
+    b. Create a histogram of the `Height` variable.
+    
+        ```{r}
+        hist(trees$Height)
+        ```
+    
+    c. Create a histogram of the `Volume` variable.
+    
+        ```{r}
+        hist(trees$Volume)
+        ```
+
+    d. For both histograms, does the data appear normally distributed? Are they skewed?
+    
+        **The height histogram is approximately normal, with a slight left-skew.**
+        
+        **The volume histogram is not normal. It is heavily skewed to the right.** 
+
+    e. For both histograms, does it appear that there are outliers in the data?
+    
+        **The height histogram does not display evidence of outliers.**
+        
+        **The volume histogram appears to have outliers.**
+        
+    f. What is the mean and median of `Height`? What is the variance and standard deviation?
+    
+        ```{r}
+        height.mean <- mean(trees$Height)
+        height.var <- var(trees$Height)
+        ```
+        
+        **The mean tree height is `r height.mean`, the variance is `r height.var` and the standard deviation is the square root of variance or `r sqrt(height.var)`.**
+    
+    g. What is the mean and median of `Volume`? What is the variance and standard deviation?
+    
+        ```{r}
+        # The round() function is helpful if you don't want
+        #   to display many decimal places
+        volume.mean <- round(mean(trees$Volume), 3)
+        volume.var <- round(var(trees$Volume), 3)
+        volume.sd <- round(sd(trees$Volume), 3)
+        ```
+        
+        **The mean tree volume is (to 3 decimal places) `r volume.mean`, the variance is `r volume.var` and the standard deviation is `r volume.sd`.**
+
+3. Load the dataset `bears.csv` from D2L.
+
+    a. What is the structure of the `bears` data frame?
+    
+        ```{r}
+        # Note: this assumes the `bears.csv` file is in the same folder as this
+        #   markdown file (*.Rmd). If the file is located elsewhere, the read.csv() 
+        #   must be passed a path to the file
+        bears <- read.csv("bears.csv")
+        
+        str(bears)
+        ```
+    
+    b. Create a frequency table for the variable `MONTH`. What is the mode, if any?
+    
+        ```{r}
+        table(bears$MONTH)
+        ```
+    
+        **Month 9 (September) has the highest frequency at 16, and thus is the mode.**
+        
+    c. Create a histogram of the `WEIGHT` variable.
+    
+        ```{r}
+        hist(bears$WEIGHT)
+        ```
+    
+    d. Is there distribution of `WEIGHT` data normal? Is it skewed? Are there outliers?
+    
+        **The weight histogram shows that the data are not normal. They are strongly right-skewed and there do appear to be outliers (weight > 500).**
+
+    e. Based on your answers to part (d), do you expect the mean and median to be the same (or very close)? If not, which do you expect to be greater?
+    
+        **Because the data are skewed, the mean and median are likely not close to the same. Because the data are right-skewed with high value outliers, the mean will be pulled to a higher value. Thus, the mean should be greater than the median.**
+    
+    f. What is the mean and median of `WEIGHT`?
+    
+        **Mean:**
+        ```{r}
+        mean(bears$WEIGHT)
+        ```
+        
+        **Median:**
+        ```{r}
+        median(bears$WEIGHT)
+        ```
+        
+    g. Based on the histogram in part (c), what would you expect the mode to be, approximately?
+    
+        **The tallest bar in the histogram is for the range from 100 to 150. Thus, we would expect the mode to be in this range.**
+        
+    h. What is the mode, if any?
+
+        ```{r}
+        sort(table(bears$WEIGHT))
+        ```
+        
+        **Technically, there are 6 modes, {140, 150, 166, 202, 204, 220}. In a practical sense, the fact that six values occur twice, while the rest occur once, is not very useful information. The peak of the histogram is a more useful estimate than the literal modes. This is often the case with continuous variables.**

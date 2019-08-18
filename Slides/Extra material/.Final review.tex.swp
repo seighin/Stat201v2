@@ -1,0 +1,142 @@
+\documentclass[xcolor=table, aspectratio=169, bigger]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+\usefonttheme[onlymath]{serif}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Chapter \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Final Review]{Stat 201: Statistics I\\Final Review}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[4/24/2019]{}
+
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{About the final exam}
+\begin{block}{}
+\begin{itemize}
+\item The exam will be in two parts
+\item The written part will consist of short answer and calculation questions
+\item The computational part will consist of a Rmarkdown file to be downloaded from D2L
+\item Can use any resource (book, notes, internet), except other people
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Early semester}
+\begin{block}{}
+\begin{itemize}
+\item Calculate probabilities:
+\begin{itemize}
+\item From a contingency table
+\item Addition rule
+\item Multiplication rule
+\end{itemize}
+\item Find probability from normal distribution (critical values)
+\item Find probability from binomial distribution
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Week 7}
+\begin{block}{}
+\begin{itemize}
+\item Identify parameters of sampling distributions
+\item Construct confidence intervals for means or proportions
+\item Correctly interpret a confidence interval
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Week 8}
+\begin{block}{}
+\begin{itemize}
+\item Calculate sample sizes for given scenarios
+\item Hypothesis testing:
+\begin{itemize}
+\item Identify the null and alternative hypotheses
+\item Calculate a test statistic and p-value
+\item Make a decision based on p-value and significance level
+\item State conclusion in terms of research question
+\end{itemize}
+\item Understand type I and type II errors
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Week 9}
+\begin{block}{}
+\begin{itemize}
+\item Test a claim about a population mean
+\item Test a claim about two population means using two independent samples
+\item Test a claim about the difference between populations using samples of paired data
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Week 10}
+\begin{block}{}
+\begin{itemize}
+\item Test a claim about two population proportions
+\item Test a claim about population proportion
+\item Test the fit of a sample frequency distribution to an expected distribution
+\item Test independence of two factors using a sample contingency table
+
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Week 11}
+\begin{block}{}
+\begin{itemize}
+\item Plot paired data in a scatterplot
+\item Calculate correlation coefficient of a sample
+\item Test whether population correlation parameter $\rho$ is zero or not
+\item Calculate regression equation from sample
+\item Make predictions for the response variable given a predictor value and regression results
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+
+\end{document}

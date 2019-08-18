@@ -1,0 +1,194 @@
+---
+title: "Homework - Week 2 (solution)"
+
+header-includes:
+ - \usepackage{shyner}
+
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F)
+
+library(VennDiagram)
+```
+
+Questions marked with "(OS3: X.X)" are from the textbook with "X.X" as the exercise number. The answers to the odd questions (odd by book numbering that is) will be in the back of the book.
+
+1. (OS3: 2.1) **True or false**. Determine if the statements below are true or false, and explain your reasoning. Determine if the statements below are true or false, and explain your reasoning. Determine if the statements below are true or false, and explain your reasoning. Determine if the statements below are true or false, and explain your reasoning. Determine if the statements below are true or false, and explain your reasoning.
+    
+    a. If a fair coin is tossed many times and the last eight tosses are all heads, then the chance that the next toss will be heads is somewhat less than 50\%.
+    
+        **False. Coin flips are independent. Thus, any flip of a fair coin has a 50% chance of heads.**
+    
+    b. Drawing a face card (jack, queen, or king) and drawing a red card from a full deck of playing cards are mutually exclusive events.
+    
+        **False. There a red face cards, so both events can occur simultaniously.**
+    
+    c. Drawing a face card and drawing an ace from a full deck of playing cards are mutually exclusive events.
+    
+        **True. A card can not be an ace and a face card at the same time.**
+
+
+2. (OS3: 2.5) **Coin flips.** If you flip a fair coin 10 times, what is the probability of
+
+    a. getting all tails? 
+    
+        **$\bv{P(10 \text{ tails}) = (0.5)^{10} = 0.000977}$**
+
+    b. getting all heads? 
+
+        **$\bv{P(10 \text{ heads}) = (0.5)^{10} = 0.000977}$**
+
+    c. getting at least one tails? 
+
+        **$\bv{P(\text{at least 1 tail})= 1 - P(10 \text{ heads}) =1 - 0.000977 = 0.99902}$**
+
+
+3. (OS3: 2.6) **Dice rolls.** If you roll a pair of fair dice, what is the probability of
+    
+    a. getting a sum of 1?
+        
+        **Let $\bv X$ be the sum of results of rolling two dice.**
+        
+        **The sum of two dice is always at least 2, so $\bv{P(X=1) = 0}$**
+
+    b. getting a sum of 5?
+    
+        **The probability of any specific pair of results $\bv{(x_1, x_2)}$ is**  
+        **$\bv{P(\text{1st die }= x_1) \times P(\text{2nd die } = x_2) = \frac 1 6 \times \frac 1 6 = \frac 1 {36}}$**
+        
+        **There are four ways to get a sum of five from two dice: $\bv{(1,4),\, (2,3),\,(3,2),\,(4,1)}$.**
+        
+        **Specific results of dice rolls are disjoint, so the probability of getting one of the pairs of results is $\bv{\frac 1 {36} + \frac 1 {36} + \frac 1 {36} + \frac 1 {36} = \frac 4 {36} = \frac 1 9}$**
+
+    c. getting a sum of 12?
+    
+        **There is only one way to get a sum of 12 $\bv{(6,6)}$, so $\bv{P(X=12) = \frac 1 {36}}$**
+
+
+4. (OS3: 2.7) **Swing voters.** A 2012 Pew Research survey asked 2,373 randomly sampled registered voters their political affiliation (Republican, Democrat, or Independent) and whether or not they identify as swing voters. 35\% of respondents identified as Independent, 23\% identified as swing voters, and 11\% identified as both.
+
+    a. Are being Independent and being a swing voter disjoint, i.e. mutually exclusive?
+    
+        **No. 11% are both, so the two events are not disjoint.**
+    
+    b. Draw a Venn diagram summarizing the variables and their associated probabilities.
+    [Note: You don't have to include the diagram in your homework submission.]
+    
+        ```{r, fig.width=4, fig.height=2.5, echo=F}
+        x <- draw.pairwise.venn(35, 23, 11, scale=F, category=c("Ind", "Swing"),
+        fill = c("red", "blue"), alpha=c(0.5, 0.5))
+        ```
+
+    c. What percent of voters are Independent but not swing voters?
+    
+        **35% are independent and 11% are independent and swing voter, so 35-11 = 24% are independent but not swing voter.**
+        
+    d. What percent of voters are Independent or swing voters?
+    
+        **$\bv{P(\text{ind or swing}) = P(\text{ind}) + P(\text{swing}) - P(\text{ind and swing}) = 0.35 + 0.23 - 0.11 = 0.47}$**
+
+    e. What percent of voters are neither Independent nor swing voters?
+
+        **Neither independent nor swing voter is the complement of independent or swing voter, so$\bv{P(\text{neither ind nor swing}) = 1 - 0.47 = 0.53}$ or 53%**
+  
+    f. Is the event that someone is a swing voter independent of the event that someone is a political Independent?
+
+        **No. $\bv{P(\text{swing}) = 0.23}$, but $\bv{P(\text{swing} \mid \text{ind}) = \frac {11} {35} = 0.314}$**
+
+5. (OS3: 2.8) **Poverty and language.** The American Community Survey is an ongoing survey that provides data every year to give communities the current information they need to plan investments and services. The 2010 American Community Survey estimates that 14.6\% of Americans live below the poverty line, 20.7\% speak a language other than English (foreign language) at home, and 4.2\% fall into both categories.
+
+    a. Are living below the poverty line and speaking a foreign language at home disjoint?
+    
+        **No.**
+
+    b. Draw a Venn diagram summarizing the variables and their associated probabilities.
+    [Note: You don't have to include the diagram in your homework submission.]
+
+        ```{r, fig.width=4, fig.height=2.5, echo=F}
+        x <- draw.pairwise.venn(14.6, 20.7, 4.2, scale=F,
+        category=c("For. lang.", "Poverty"),
+        fill = c("red", "blue"), alpha=c(0.5, 0.5))
+        ```
+
+    c. What percent of Americans live below the poverty line and only speak English at home?
+    
+        **10.4%**
+
+    d. What percent of Americans live below the poverty line or speak a foreign language at home?
+
+        **20.7 + 14.6 - 4.2 = 31.1**
+        
+    e. What percent of Americans live above the poverty line and only speak English at home? 
+    
+        **1 - 31.1 = 68.9**
+
+    f. Is the event that someone lives below the poverty line independent of the event that the person speaks a foreign language at home?
+    
+        **No.**
+
+
+6. (OS3: 2.9) **Disjoint vs. independent.** In parts~(a) and~(b), identify whether the events are disjoint, independent, or neither (events cannot be both disjoint and independent).
+
+    a. You and a randomly selected student from your class both earn A's in this course. 
+    
+        **Independent**
+    
+    b. You and your class study partner both earn A's in this course.
+    
+        **Neither**
+
+    c. If two events can occur at the same time, must they be dependent?
+
+        **No**
+
+7. (OS3: 2.10) **Guessing on an exam.** In a multiple choice exam, there are 5 questions and 4 choices for each question (a, b, c, d). Nancy has not studied for the exam at all and decides to randomly guess the answers. What is the probability that:
+
+    a. the first question she gets right is the $5^{th}$ question?
+    
+        **Equivalent to getting first 4 questions wrong and 5th question right.**
+        
+        **$\bv{\displaystyle P(\text{5th is first right}) = \frac 3 4 \times \frac 3 4 \times \frac 3 4 \times \frac 3 4 \times \frac 1 4 = \frac {3^4}{4^5} = \frac {81}{1024} = 0.079}$**
+
+    b. she gets all of the questions right?
+    
+        **$\bv{\displaystyle P(\text{all right}) = \left(\frac 1 4\right)^5 = \frac {1}{1024} = 0.00097}$**
+
+    c. she gets at least one question right?
+    
+        **Getting at least one question right is the complement of getting all questions wrong.**
+        
+        **$\displaystyle \bv{P(\text{all wrong}) = \left(\frac 3 4 \right)^5 = \frac {243}{1024} = 0.237}$**
+        
+        **$\displaystyle \bv{P(\text{at least one right}) = 1 - P(\text{all wrong}) = 1 - 0.273 = 0.727}$**
+
+
+8. (OS3: 2.14) **Health coverage, frequencies.** The 
+Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey 
+designed to identify risk factors in the adult population and report emerging 
+health trends. The following table summarizes two variables for the respondents: 
+health status and health coverage, which describes whether each respondent had 
+health insurance.
+\begin{center}
+\begin{tabular}{rrrrrrrr}
+                    &       & \multicolumn{5}{c}{\textit{Health Status}} &  \\ 
+\cline{3-7}
+                    &       & Excellent & Very good & Good  & Fair  & Poor  & Total\\ 
+\cline{2-8}
+\textit{Health}     & No    & 459       & 727       & 854   & 385   & 99    & 2,524 \\ 
+\textit{Coverage}   & Yes   & 4,198     & 6,245     & 4,821 & 1,634 & 578   & 17,476 \\ 
+\cline{2-8}
+                    & Total & 4,657     & 6,972     & 5,675 & 2,019 & 677   & 20,000
+\end{tabular}
+\end{center}
+
+    a. If we draw one individual at random, what is the probability that the 
+respondent has excellent health and doesn't have health coverage?
+
+        **$\displaystyle \bv{P(A \text{ and } B) = \frac{459}{20000} = 0.02295}$**
+
+    b. If we draw one individual at random, what is the probability that the 
+respondent has excellent health or doesn't have health coverage?
+
+        **$\displaystyle \bv{P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B) = \frac{2524}{20000} + \frac{4657}{20000} - \frac{459}{20000} = \frac{6722}{20000} = 0.3361}$**

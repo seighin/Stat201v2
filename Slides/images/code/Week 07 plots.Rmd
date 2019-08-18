@@ -1,0 +1,46 @@
+---
+title: "Week 7 plots"
+author: 'Stat 201: Statistics I'
+date: "March 10, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+```{r}
+metro.hgts <- read.csv("../../../Data/metro_hgts_sample_stats.csv")
+```
+
+
+```{r}
+g <- ggplot(metro.hgts, aes(x=mean))
+g <- g + geom_histogram(bins=20, fill="cadetblue", color="black")
+#g <- g + geom_vline(xintercept = 67.42, color="red", linetype=2)
+g <- g + theme_bw()
+g <- g + labs(title="Distribution of mean heights of 100 samples",
+              x="Mean height (in)", y="")
+
+g
+
+ggsave("../wk07_metro_hgts_hist.png", width=4.25, height=1.75)
+
+```
+
+```{r}
+g <- ggplot(metro.hgts[1:50,], aes(x=sample.num, y=mean, color=mean.in.ci))
+g <- g + geom_hline(yintercept = 67.42, linetype=2)
+g <- g + geom_point( show.legend = F)
+g <- g + geom_linerange(aes(ymin=ci.low, ymax=ci.up), size=0.5, show.legend=F)
+g <- g + theme_bw()
+g <- g + scale_color_manual(values=c(no="red", yes="black"))
+g <- g + labs(x="Sample", y="Height (in)")
+
+g
+
+ggsave("../wk07_metro_hgts_cis.png", width=5.5, height=3)
+
+```

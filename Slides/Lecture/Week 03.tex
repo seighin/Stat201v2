@@ -1,0 +1,637 @@
+\documentclass[xcolor=table, aspectratio=169, bigger]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+\usefonttheme[onlymath]{serif}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+
+\title[Week 1]{Stat 201: Statistics I\\ Week 3 }
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[1/6/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+
+
+\begin{document}
+ 
+\frame{\titlepage}
+
+%
+% Week 3
+%
+\setcounter{section}{2}
+\section{More Probability, Sampling methods and Types of Studies}
+
+%
+% Section 3.1
+%
+\subsection{Conditional Probability and Bayes Theorem}
+
+
+%%%%%%%%%%
+\begin{frame}{Formal definition of conditional probability}
+
+\begin{block}{}
+Recall the multiplication rule,\\ \smallskip
+\eq{P(A \text{ and } B) = P(A) \times P(B \mid A)} \medskip
+\pause
+From this, the formal definition of conditional probability is\\ \smallskip
+\eq{P(B \mid A) = \frac {P(A \text{ and } B)}{P(A)}} 
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Intuitive approach to conditional probability}
+
+\begin{block}{}
+An intuitive approach to $P(B\mid A)$ is to assume $A$ has occurred, then count the instances of $B$. $A$ is, in a sense, the new sample space.\\ \smallskip
+\eq{ P(B\mid A) = \frac{\text{number of $B$ and $A$}}{\text{number of $A$}} }
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Practice: Cancer screening}
+\begin{block}{}
+{\centering \renewcommand{\arraystretch}{1}
+\begin{tabular}{c | c  c | c}
+ & Positive & Negative & Total \\
+\hline
+Cancer & 74 (0.074) & 13 (0.013) & 87 (0.087)\\
+No cancer & 26 (0.026) & 887 (0.887) & 913 (0.913)\\
+\end{tabular}\par
+\renewcommand{\arraystretch}{1.5}
+}
+\end{block}
+
+\begin{exampleblock}{}
+What is the probability of a positive test result if the subject has cancer?
+\begin{itemize}
+\pause
+\item $A$ = Subject has cancer\\
+$B$ = Positive test result
+\pause
+\item Find $P(B\mid A)$, formally, \\ \smallskip 
+\pause
+\eq{P(B\mid A) = \frac {P(A \text{ and } B)}{P(A)} = \frac {0.074}{0.087} = 0.851}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Practice: Cancer screening, cont.}
+\begin{block}{}
+{\centering \renewcommand{\arraystretch}{1}
+\begin{tabular}{c | c  c | c}
+ & Positive & Negative & Total \\
+\hline
+Cancer & 74 (0.074) & 13 (0.013) & 87 (0.087)\\
+No cancer & 26 (0.026) & 887 (0.887) & 913 (0.913)\\
+\end{tabular}\par
+\renewcommand{\arraystretch}{1.5}
+}
+\end{block}
+
+\begin{exampleblock}{}
+What is the probability of a positive test result if the subject has cancer?
+\begin{itemize}
+\item $A$ = Subject has cancer\\
+$B$ = Positive test result
+
+\item Find $P(B\mid A)$, intuitive approach,\\ \smallskip
+\pause
+\eq{ P(B\mid A) = \frac{\text{number of $B$ and $A$}}{\text{number of $A$}} = \frac {74}{87} = 0.851 }
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Practice: Cancer screening, cont.}
+\begin{block}{}
+{\centering \renewcommand{\arraystretch}{1}
+\begin{tabular}{c | c  c | c}
+ & Positive & Negative & Total \\
+\hline
+Cancer & 74 (0.074) & 13 (0.013) & 87 (0.087)\\
+No cancer & 26 (0.026) & 887 (0.887) & 913 (0.913)\\
+\end{tabular}\par
+\renewcommand{\arraystretch}{1.5}
+}
+\end{block}
+
+\begin{exampleblock}{}
+What is the probability of a negative test result if the subject does not have cancer?
+\begin{itemize}
+\pause
+\item $A$ = Subject does not have cancer\\
+$B$ = Negative test result
+\pause
+\item Find $P(B \mid A)$, formally\\ \smallskip
+\eq{P(B\mid A) = \frac {P(A \text{ and } B)}{P(A)} = \frac {0.887}{0.913} = 0.972}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Practice: Cancer screening, cont.}
+\begin{block}{}
+{\centering \renewcommand{\arraystretch}{1}
+\begin{tabular}{c | c  c | c}
+ & Positive & Negative & Total \\
+\hline
+Cancer & 74 (0.074) & 13 (0.013) & 87 (0.087)\\
+No cancer & 26 (0.026) & 887 (0.887) & 913 (0.913)\\
+\end{tabular}\par
+\renewcommand{\arraystretch}{1.5}
+}
+\end{block}
+
+\begin{exampleblock}{}
+What is the probability of a negative test result if the subject does not have cancer?
+\begin{itemize}
+\item $A$ = Subject does not have cancer\\
+$B$ = Negative test result
+\item Find $P(B \mid A)$, intuitive approach, \\ \smallskip
+\eq{ P(B\mid A) = \frac{\text{number of $B$ and $A$}}{\text{number of $A$}} = \frac {887}{913} = 0.972 }
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Sensitivity and specificity}
+\begin{block}{}
+The proceeding examples have specific terms when used with diagnostic tests.
+\begin{itemize}
+\pause
+\item \bt{Sensitivity} is the probability of a positive test result for a subject which has the conditions, $P(\text{positive test}\mid \text{has disease})$.
+\pause
+\item \bt{Specificty} is the probability of a negative test result for a subject which does not have the conditions, $P(\text{negative test}\mid\text{does not have disease})$.
+\end{itemize}
+
+\pause
+Many diagnostic tests work by measuring the level of a certain chemical and returning a positive result if it is above a designated threshold. Adjusting this threshold to increase sensitivity will decrease specificity, and vice versa. There is always a trade-off.
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Sensitivity and specificity, examples}
+\begin{exampleblock}{Example}
+Screening tests for prostate cancer measure levels of Prostate Specific Antigen (PSA). The sensitivity and specificity of the test depends on the cutoff point used.\\
+\bigskip
+{\centering
+\tabspace{1.3}
+\begin{tabular}{r | c c}
+& $<$ 4.0 ng/mL & $<$ 3.0 ng/mL\\
+\hline
+Sensitivity (\%) & 21 & 32\\
+Specificity (\%) & 91 & 85 
+\end{tabular}
+\par}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Sensitivity and specificity, examples}
+\begin{exampleblock}{Example}
+Accuracy of tests often depend also on the population being screened. The sensitivity of mammograms is different for different age groups.\\
+\bigskip
+{\centering
+\tabspace{1.3}
+\begin{tabular}{r | c c}
+& 40-49 years & 50-59 years\\
+\hline
+Sensitivity (\%) & 77 & 88\\
+\end{tabular}
+\par}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Screening tests for rare events}
+\begin{exampleblock}{Example}
+Suppose there is a screening test for a rare disease which has a prevalence of 0.3\%. The screening test has 99\% sensitivity and 99\% specificity. 100,000 people are screened.\\
+\smallskip
+{\centering \renewcommand{\arraystretch}{1}
+\begin{tabular}{c | c  c | c}
+ & Positive & Negative & Total \\
+\hline
+Disease & 297 & 3 & 300\\
+No disease & 997 & 98703 & 99700\\
+\hline
+Total & 1294 & 98706 & 100,000 
+\end{tabular}\par
+\renewcommand{\arraystretch}{1.5}
+}
+\smallskip
+What is the probability that someone who tested positive does not have the disease?\\ \smallskip \pause
+\eq{P(\text{no disease} \mid  \text{positive}) = \frac {997}{1294} = 0.770}
+\begin{itemize}
+\pause\item The complement, $P(\text{disease} \mid  \text{positive}) = 0.23$, is known as the \bt{precision} or the \bt{positive predictive value (PPV)} of the test.
+\end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Screening tests for rare events, cont.}
+\begin{block}{}
+\begin{itemize}
+\item This does not mean screening tests are not useful. Often they are a first step before tests that are more accurate, but also more expensive and/or more invasive.
+\begin{itemize}
+\item Cancer screening, followed by biopsy for confirmation
+\end{itemize}
+
+\pause
+\item Sometimes tests like these can have profound consequences for peoples lives.
+\begin{itemize}
+\item Drug screening for jobs
+\item Vetting for refugees or immigrants 
+\item etc.
+\end{itemize}
+
+\pause
+\item It is important to remember that no test is perfect and there are often trade-offs (sensitivity / specificity).
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem}
+
+\begin{block}{}
+Consider again the multiplication rule,\\ \smallskip
+\eq{P(A \text{ and } B) = P(A) \times P(B \mid A)} \medskip
+\pause
+It could also be expressed with equal validity as,\\ \smallskip
+\eq{P(A \text{ and } B) = P(B) \times P(A \mid B)} \medskip
+\pause
+With some algebra, \\ \smallskip
+\eq{P(B) \times P(A \mid B) = P(A) \times P(B \mid A)} \smallskip
+\pause
+\eq{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)}}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, cont.}
+
+\begin{block}{}
+\eq{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)}} \medskip
+
+This equation is known as \bt{Bayes Theorem}.
+\end{block}
+
+\begin{exampleblock}{}
+Thomas Bayes was a Presbyterian minister and amateur mathematician who lived 1701 - 1761. The early form of the theorem that bears his name was published posthumously, though it has been refined by many people since..
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, example}
+\begin{exampleblock}{Example}
+According to the Minnesota Department of Public Safety 2017 statistics, there were 78,465 motor vehicle crashes, 341 of them involving fatalities. Seat belts were used in 54.1\% of the fatal crashes (in 13.6\% of fatal crashes, seat belt use was unknown). Overall, the rate of seat belt use in MN was 92.0\%. \\ 
+\medskip
+
+What is the probability a motor vehicle crash with occupants wearing seat belts results in deaths?
+
+\begin{itemize}
+\pause\item $A$ = A crash results in fatalities. $\ds P(A) = \frac{341}{78465} = 0.0043$
+
+\pause\item $B$ = Car occupants use seat belts. $P(B) = 0.92$
+
+\pause\item $B \mid A$ = Occupants used seat belts given the crash involved fatalities.\\ \smallskip
+$P(B \mid A) = 0.541$
+\end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, example}
+\begin{exampleblock}{Example}
+What is the probability a motor vehicle crash with occupants wearing seat belts results in deaths?\\ \smallskip
+\eq{P(A) = 0.0043 \qquad P(B) = 0.92 \qquad P(B \mid A) = 0.541} \smallskip
+
+\begin{itemize}
+\pause\item Find $P(A \mid B)$ \\ \smallskip
+\pause\eq{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)}} \medskip
+\pause\eq{P(A \mid B) = \frac{0.0043 \times 0.541}{0.92} = 0.0025}
+\end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, interpretation}
+\begin{block}{}
+There are two main ways to think about Bayes Theorem:
+
+\begin{itemize}
+\pause\item Update a probability with new information.\\ \smallskip
+If you know a car is involved in a crash, the probability it resulted in a death is 0.0043. However, if you further learn that the occupants were wearing seat belts, that probability drops to 0.0025. If you learn more information, such as the age of the driver, you could further refine the probability of fatalities.
+
+\pause\item Reverse a known conditional probability.\\ \smallskip
+If we know the probability of seat belt use given the crash involved a fatality (and the marginal probabilities of fatal crashes and seat belt use overall), we can figure out the probability of fatalities given seat belt use.
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Why learn about Bayes Theorem?}
+\begin{block}{}
+\begin{itemize}
+\item In simple cases, probabilities might be easier to calculate using tree diagrams. However, in more complicated scenarios, Bayes Theorem can become an important tool.
+
+\pause\item There are two main schools of statistics. This class, and undergraduate statistics in general, utilize \bt{frequentist} statistics. A more recent and more complicated approach is known as \bt{bayesian} statistics, which is based, as you might expect, on Bayes Theorem. 
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}<handout:0>{Group work}
+\begin{block}{}
+\begin{itemize}
+\item Complete all parts of question 1.
+\item Probabilities can be expressed as fractions.
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%
+% 	Section 3.2
+%%%%
+\subsection{Sampling Methods and Types of Studies}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Samples}
+
+\begin{block}{}
+\begin{itemize}
+\item Recall, when we want to know something about a population and we can't collect data from the entire population, we can collect data from a subset, or a \bt{sample}, of the population instead.
+\pause
+\item We can then use statistics to learn something about the whole population.
+\pause
+\item Therefore, how we pick our sample is very important in how valid the interpretation of our results are.
+\end{itemize}
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item Suppose an organization is interesting in the taco consumption by Metro State students. It would be difficult, if not impossible, to ask every student about their taco eating habits. A sample is needed.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of samples: Random sample}
+
+\begin{block}{}
+A \bt{random sample} is a sample selected such that every individual member of a population has an equal chance of being included.
+\end{block}
+\pause
+\begin{block}{}
+A \bt{simple random sample} is a sample selected such that every possible sample of a specific size has an equal chance of being selected.
+\begin{itemize}
+\item These are the ``best" kind of samples for producing valid, unbiased results, but they are not always easy to get. 
+\end{itemize}
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item Given an alphabetical list of students, use a random number generator to select a sample.
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of samples: Systematic sampling}
+
+\begin{block}{}
+\bt{Systematic sampling} is a method where every $k$th member of of a population is selected.
+\begin{itemize}
+\item These samples are ofter easier to produce, but can lead to biased samples. 
+\end{itemize}
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item Given an alphabetical list of students, select every fifth student until you have a sample of the desired size.
+\end{itemize}
+\end{exampleblock}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of samples: Convenience sampling}
+
+\begin{block}{}
+\bt{Convenience sampling} is a method of choosing members of a population that are nearby or easy to access.
+\begin{itemize}
+\item The easiest of all methods, but by far the lowest quality data for producing results.
+\item On the other hand, convenience samples are sometimes the only possible sample.
+\end{itemize}
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item Wander the halls before class, asking students who happen to walk by.
+\item Put a poll on the Metro State website.
+\item Everyone who is diagnosed with a rare disease at a particular clinic.
+\end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of samples: Stratified sampling}
+
+\begin{block}{}
+\bt{Stratified sampling} is a method where the population is divided into groups and samples are selected from each group.
+\begin{itemize}
+\item Useful when you want to ensure that a factor of interest has enough representation, but it is not a random sample as we have defined it.
+\end{itemize}
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item If we have particular interest in the taco consuming difference between graduate students and undergrads, select a sample from each group.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of samples: Cluster sampling}
+
+\begin{block}{}
+\bt{Cluster sampling} is a method where the population is divided into sections or clusters. Then, a number of clusters are randomly selected and all members of the clusters are included in the sample.
+\begin{itemize}
+\item More convenient than some methods, but better randomization the pure convenience sampling.
+\end{itemize}
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item Choose 5 random classes, and survey all the students in those classes.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of samples: Multistage sampling}
+
+\begin{block}{}
+\bt{Multistage sampling} is a when a combination of methods are used to produce a sample.
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+\begin{itemize}
+\item Choose random classes by cluster sampling, and then take a simple random sample of students from each chosen class.  
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of studies}
+
+\begin{block}{}
+In an \bt{observational study} data is collected from a sample without trying to modify behavior or results. 
+\end{block}
+\pause
+\begin{block}{}
+In an \bt{experiment} a change (treatment) is made to some or all of sample and then data is collected in order to detect changes. 
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Types of observational studies}
+
+\begin{block}{}
+A \bt{cross-sectional} study measures and collects data from one point in time (the present).
+\end{block}
+\pause
+\begin{block}{}
+A \bt{retrospective} study collects data from the past, whether from recollections or by examining records.
+\begin{itemize}
+\item Also know as: case-control
+\end{itemize}
+\end{block}
+\pause
+\begin{block}{}
+A \bt{prospective} study follows subjects into the future to measure and collect data.
+\begin{itemize}
+\item Also know as: longitudinal study, cohort study
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Experimental design: Controlling}
+\begin{block}{}
+An experiment is \bt{controlled} when at least one group of subjects are not given any experimental treatments. The control group might receive no treatments, a placebo treatment (see blinding) or a standard-of-care treatment. Controlling an experiment allows a direct measurement of any possible treatment effects. 
+\end{block}
+
+\begin{exampleblock}{Example}
+The World Health Organization says the average case fatality rate for Ebola virus disease (EVD) is 50\%, with fatality rates of individual breakouts ranging from 25\% to 90\%. \\
+\medskip
+PREVAIL II, a controlled trial of a new drug cocktail for EVD, found a fatality rate in the control group was 37\% and 22\% in the treatment group.
+\end{exampleblock}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Experimental design: Blinding}
+\begin{block}{}
+\bt{Blinding} is the process of hiding which treatment or lack of treatment a subject is receiving from one or more groups of study participants. This is done in order to reduce bias in the results.
+
+\begin{itemize}
+\pause\item A \bt{single blinded} study is one where the subjects don't know what treatments they are receiving.
+
+\pause\item A \bt{double blinded} study is one where both the subjects and the researchers administrating treatment and gathering results don't know which treatment the subjects are receiving.
+\end{itemize}
+\end{block}
+
+\pause
+\begin{block}{}
+The \bt{placebo effect} is a phenomenon where people who believe they are being treated demonstrate improvement.
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Experiment design: Replication}
+\begin{block}{}
+\bt{Replication} is the repetition of the experiment on more than one individual or in more than one study.
+
+\begin{itemize}
+\pause\item Experimental studies should have adequate sample sizes to ensure that observed effects are ``true" effects and not due to individual characteristics or chance.
+\pause\item Experimental studies should be, but rarely are, repeated by different researchers to verify results.
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Experimental design: Randomization}
+
+\begin{block}{}
+\bt{Randomization} is the process selecting samples and assigning treatment groups randomly. This is done to ensure that samples are representative of populations and that characteristics are evenly distributed among treatment groups.
+\end{block}
+
+\pause
+\begin{block}{}
+\bt{Confounding variables} (or just confounders) are unmeasured and possible unknown factors that affect the experimental outcome. 
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}<handout:0>{Group work}
+\begin{block}{}
+\begin{itemize}
+\item Answer all parts of question 2.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}

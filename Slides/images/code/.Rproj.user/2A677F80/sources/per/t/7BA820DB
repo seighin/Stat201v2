@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552246690952.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "92379618",
+    "id" : "7BA820DB",
+    "lastKnownWriteTime" : 1555952022,
+    "last_content_update" : 1555952022459,
+    "path" : "~/Dropbox/Classes - Prof/Stat 201 (Reorg 2019)/Materials/Slides/images/code/Week 11 plots.Rmd",
+    "project_path" : "Week 11 plots.Rmd",
+    "properties" : {
+        "cursorPosition" : "21,19",
+        "last_setup_crc32" : "",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

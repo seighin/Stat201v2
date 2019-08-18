@@ -1,0 +1,173 @@
+\documentclass[xcolor=table, aspectratio=169, bigger]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+\usefonttheme[onlymath]{serif}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Chapter \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Midterm Review]{Stat 201: Statistics I\\Midterm Review}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[date]{date
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+
+
+\begin{document}
+\frame{\titlepage}
+
+%%%%%%%%%%
+\begin{frame}{About the midterm exam}
+\begin{block}{}
+\begin{itemize}
+\item The exam will be in two parts
+\item The written part will consist of short answer and calculation questions
+\item The computational part will consist of a Rmarkdown file to be downloaded from D2L
+\item Can use any resource (book, notes, internet), except other people
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Week 1}
+\begin{block}{}
+\begin{itemize}
+\item Know the difference between a parameter and a statistic
+\item Identify type of variable
+\begin{itemize}
+\item Quantitative: Discrete or continuous
+\item Categorical (Qualitative)
+\end{itemize}
+\item Identify levels of measurement
+\begin{itemize}
+\item Nominal
+\item Ordinal
+\item Interval
+\item Ratio
+\end{itemize}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Week 2}
+\begin{block}{}
+\begin{itemize}
+\item Calculate probabilities:
+\begin{itemize}
+\item From a 2 $\times$ 2 contingency table
+\item Complements
+\item Addition rule
+\item Multiplication rule
+\end{itemize}
+\item Identify disjoint events
+\item Identify independent and dependent events
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Week 3}
+\begin{block}{}
+\begin{itemize}
+\item Calculate conditional probabilities
+\item Understand false positive and false negative
+\item Find the sensitivity and specificity of a screening test
+\item Identify sampling method
+\begin{itemize}
+\item Simple random sample
+\item Convenience sample
+\item Cluster sample
+\end{itemize}
+\item Identify type of study
+\begin{itemize}
+\item Experimental
+\item Observational
+\end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+%%%%%%%%%%
+\begin{frame}{Week 4}
+\begin{block}{}
+\begin{itemize}
+\item Create a histogram
+\item From histogram, identify skewed distributions and outliers
+\item From a set of data, find (with proper units):
+\begin{itemize}
+\item Mean
+\item Median
+\item Variance
+\item Standard deviation
+\end{itemize}
+\item Identify when to use mean/median
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%
+\begin{frame}{Week 5}
+\begin{block}{}
+\begin{itemize}
+\item Calculate $z$-scores from mean and standard deviation
+\item Identify unusual values as more than two SDs from mean
+\item Calculate 5 number summary and create corresponding boxplot
+\item Find the mean and standard deviation for an arbitrary probability distribution
+\item Find probabilities from an arbitrary probability distribution
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%
+\begin{frame}{Week 6}
+\begin{block}{}
+\begin{itemize}
+\item Find probability of event from a binomial distribution
+\item Find probability from standard normal, $z$, distribution
+\item Find $z$-score which corresponds to given probability
+\item Find probability of event from a non-standard normal distribution
+\item Find value from non-standard normal distribution which corresponds to given probability
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}

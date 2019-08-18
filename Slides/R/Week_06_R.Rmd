@@ -1,0 +1,739 @@
+---
+title: "Week 6: Binomial and Normal Distributions"
+author: 'Stat 201: Statistics I'
+date: "March 2, 2019"
+output: 
+    beamer_presentation:
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      fig.width = 4, fig.height = 1.5, fig.align = "center")
+
+library(ggplot2)
+
+set.seed(42)
+```
+
+```{r}
+normal.plot <- function(x = NULL,
+                        x.ticks.sd = (-1:1)*2,
+                        mu = 0, sigma = 1,
+                        less.x = NULL,
+                        less.x.2 = NULL,
+                        greater.x = NULL,
+                        greater.x.2 = NULL,
+                        between.x = NULL,
+                        fill.color = "cadetblue",
+                        less.color = NULL,
+                        less.color.2 = NULL,
+                        greater.color = NULL,
+                        greater.color.2 = NULL,
+                        between.color = NULL) {
+    if (is.null(x)){
+        # If no x values given, default to -3.1 to 3.1 SDs
+        l.bound <- mu - 3 * sigma
+        u.bound <- mu + 3 * sigma
+        
+        x <- seq(l.bound, u.bound, length=500)
+    } 
+
+    x.ticks <- mu + x.ticks.sd * sigma
+    x.ticks <- x.ticks[x.ticks>=min(x) & x.ticks<=max(x)]        
+    
+    # The density function for specified distribution
+    dense.func <- function(x){
+        dnorm(x, mean=mu, sd=sigma)
+    }
+    
+    # y values are the density curve
+    y <- dense.func(x)
+    
+    # Data frame for the plot
+    plot.df <- data.frame(x=x, y=y)
+    
+    # Define the plot
+    g <- ggplot(plot.df, aes(x=x, y=y))
+    
+    # Display range less than value?
+    if (!is.null(less.x)){
+        if (is.null(less.color)){
+            less.color <- fill.color
+        }
+        
+        area.less.x <- c(x[x<= less.x], less.x)
+        plot.less.df <- data.frame(x=area.less.x, y=dense.func(area.less.x))
+        
+        g <- g + geom_area(data=plot.less.df, fill=less.color, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x, y=0, xend=less.x, yend=dense.func(less.x)),
+                              color=less.color)
+        
+        x.ticks <- c(x.ticks, less.x)
+    }
+    
+    if (!is.null(less.x.2)){
+        if (is.null(less.color.2)){
+            less.color.2 <- fill.color
+        }
+        
+        area.less.x.2 <- c(x[x<= less.x.2], less.x.2)
+        plot.less.df.2 <- data.frame(x=area.less.x.2, y=dense.func(area.less.x.2))
+        
+        g <- g + geom_area(data=plot.less.df.2, fill=less.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x.2, y=0, xend=less.x.2, yend=dense.func(less.x.2)),
+                              color=less.color.2)
+        
+        x.ticks <- c(x.ticks, less.x.2)
+    }
+
+    # Display range greater than value?
+    if (!is.null(greater.x)){
+        if (is.null(greater.color)){
+            greater.color <- fill.color
+        }
+
+        area.greater.x <- c(greater.x, x[x >= greater.x])
+        plot.greater.df <- data.frame(x=area.greater.x, y=dense.func(area.greater.x))
+
+        g <- g + geom_area(data=plot.greater.df, fill=greater.color, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x, y=0, 
+                                  xend=greater.x, yend=dense.func(greater.x)),
+                              color=greater.color)
+        
+        x.ticks <- c(x.ticks, greater.x)
+    }
+
+    if (!is.null(greater.x.2)){
+        if (is.null(greater.color.2)){
+            greater.color.2 <- fill.color
+        }
+
+        area.greater.x.2 <- c(greater.x.2, x[x >= greater.x.2])
+        plot.greater.df.2 <- data.frame(x=area.greater.x.2, y=dense.func(area.greater.x.2))
+
+        g <- g + geom_area(data=plot.greater.df.2, fill=greater.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x.2, y=0, 
+                                  xend=greater.x.2, yend=dense.func(greater.x.2)),
+                              color=greater.color.2)
+        
+        x.ticks <- c(x.ticks, greater.x.2)
+    }
+
+    # Display range between values?
+    if (!is.null(between.x)){
+        if (is.null(between.color)){
+            between.color <- fill.color
+        }
+
+        area.between.x <- c(between.x[1], 
+                            x[x >= between.x[1] & x <= between.x[2]],
+                            between.x[2])
+        plot.between.df <- data.frame(x=area.between.x, y=dense.func(area.between.x))
+
+        g <- g + geom_area(data=plot.between.df, fill=between.color, alpha=.6)
+        g <- g + geom_segment(aes(x=between.x[1], y=0, 
+                                  xend=between.x[1], yend=dense.func(between.x[1])),
+                              color=between.color)
+        g <- g + geom_segment(aes(x=between.x[2], y=0, 
+                                  xend=between.x[2], yend=dense.func(between.x[2])),
+                              color=between.color)
+        
+        x.ticks <- c(x.ticks, between.x)
+    }
+
+    x.ticks <- sort(x.ticks)
+    x.ticks.labels <- paste(round(x.ticks,2))
+                            
+    # Draw density curve
+    g <- g + geom_line(size=1)
+    g <- g + theme_bw() + xlab("") + ylab("Density")
+    g <- g + scale_x_continuous(breaks=sort(x.ticks), minor_breaks = NULL,
+                                labels=x.ticks.labels)
+    
+    g
+}
+
+binomial.plot <- function(x = NULL,
+                        x.ticks = NULL,
+                        n = 10, p = 0.5,
+                        less.x = NULL,
+                        less.x.2 = NULL,
+                        greater.x = NULL,
+                        greater.x.2 = NULL,
+                        between.x = NULL,
+                        fill.color = "cadetblue",
+                        less.color = NULL,
+                        less.color.2 = NULL,
+                        greater.color = NULL,
+                        greater.color.2 = NULL,
+                        between.color = NULL) {
+    if (is.null(x)){
+        # If no x values given, default to 0 to n
+        l.bound <- - 0.51
+        u.bound <- n + 0.5 
+        
+        x <- seq(l.bound, u.bound, length=500)
+    } 
+    
+    if (is.null(x.ticks)){
+        x.ticks <- seq(round(min(x+0.01)), round(max(x)), by=2)
+    }
+
+    # The density function for specified distribution
+    dense.func <- function(x){
+        dbinom(round(x), size=n, prob=p)
+    }
+    
+    # y values are the density curve
+    y <- dense.func(x)
+    
+    # Data frame for the plot
+    plot.df <- data.frame(x=x, y=y)
+    
+    # Define the plot
+    g <- ggplot(plot.df, aes(x=x, y=y))
+    
+    # Display range less than value?
+    if (!is.null(less.x)){
+        if (is.null(less.color)){
+            less.color <- fill.color
+        }
+
+        area.less.x <- x[x<= less.x + 0.5]
+        plot.less.df <- data.frame(x=area.less.x, y=dense.func(area.less.x))
+        
+        g <- g + geom_area(data=plot.less.df, fill=less.color, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x+0.5, y=0, 
+                                  xend=less.x+0.5, yend=dense.func(less.x+0.5)),
+                              color=less.color)
+        
+        x.ticks <- c(x.ticks, less.x)
+    }
+    
+
+    if (!is.null(less.x.2)){
+        if (is.null(less.color.2)){
+            less.color.2 <- fill.color
+        }
+
+        area.less.x.2 <- x[x<= less.x.2 + 0.5]
+        plot.less.df.2 <- data.frame(x=area.less.x.2, y=dense.func(area.less.x.2))
+        
+        g <- g + geom_area(data=plot.less.df.2, fill=less.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x.2+0.5, y=0, 
+                                  xend=less.x.2+0.5, yend=dense.func(less.x.2+0.5)),
+                              color=less.color.2)
+        
+        x.ticks <- c(x.ticks, less.x.2)
+    }
+
+    # Display range greater than value?
+    if (!is.null(greater.x)){
+        if (is.null(greater.color)){
+            greater.color <- fill.color
+        }
+
+        area.greater.x <- x[x >= greater.x + 0.5]
+        plot.greater.df <- data.frame(x=area.greater.x, y=dense.func(area.greater.x))
+
+        g <- g + geom_area(data=plot.greater.df, fill=greater.color, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x + 0.5, y=0, 
+                                  xend=greater.x + 0.5, yend=dense.func(greater.x+0.5)),
+                              color=greater.color)
+        
+        x.ticks <- c(x.ticks, greater.x)
+    }
+
+    if (!is.null(greater.x.2)){
+        if (is.null(greater.color.2)){
+            greater.color.2 <- fill.color
+        }
+
+        area.greater.x.2 <- x[x >= greater.x.2 + 0.5]
+        plot.greater.df.2 <- data.frame(x=area.greater.x.2, y=dense.func(area.greater.x.2))
+
+        g <- g + geom_area(data=plot.greater.df.2, fill=greater.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x.2 + 0.5, y=0, 
+                                  xend=greater.x.2 + 0.5, yend=dense.func(greater.x.2+0.5)),
+                              color=greater.2.color)
+        
+        x.ticks <- c(x.ticks, greater.x.2)
+    }
+
+    # Display range between values?
+    if (!is.null(between.x)){
+        if (is.null(between.color)){
+            between.color <- fill.color
+        }
+
+        area.between.x <- c(between.x[1] + 0.5, 
+                            x[x > between.x[1] + 0.5 & x <= between.x[2] + 0.5])
+        plot.between.df <- data.frame(x=area.between.x, y=dense.func(area.between.x))
+
+        g <- g + geom_area(data=plot.between.df, fill=between.color, alpha=.6)
+        g <- g + geom_segment(aes(x=between.x[1] + 0.5, y=0, 
+                                  xend=between.x[1] + 0.5, yend=dense.func(between.x[1] + 0.5)),
+                              color=between.color)
+        g <- g + geom_segment(aes(x=between.x[2] + 0.5, y=0, 
+                                  xend=between.x[2] + 0.5, yend=dense.func(between.x[2]+0.5)),
+                              color=between.color)
+        
+        x.ticks <- c(x.ticks, between.x)
+    }
+
+    x.ticks <- sort(x.ticks)
+    x.ticks.labels <- paste(round(x.ticks,4))
+                            
+    # Draw density curve
+    g <- g + geom_step(size=1, direction = "vh")
+    g <- g + theme_bw() + xlab("") + ylab("Density")
+    g <- g + scale_x_continuous(breaks=sort(x.ticks), minor_breaks = NULL,
+                                labels=x.ticks.labels)
+    
+    g
+}
+
+```
+
+## R Distribution Functions
+
+R provides four functions for many commonly used distributions. These functions have names that begin with a letter (`d`, `p`, `q` or `r`) followed by the distribution name or an abbreviation of the name (i.e. `norm` for normal).
+
+Function | Binomial | Normal
+------|------|------
+Density | `dbinom` | `dnorm`
+Probability | `pbinom` | `pnorm`
+Quantile | `qbinom` | `qnorm`
+Random | `rbinom` | `rnorm`
+
+## Probability functions
+
+The `p` functions will return the probability, or proportion of, a distribution is less than or greater than a given value.
+
+- Example: What proportion of the standard normal distribution is less than 0.8?
+
+    ```{r, echo=T, eval=F}
+    pnorm(0.8)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pnorm(0.8)
+    ```
+
+```{r}
+normal.plot(less.x = 0.8)
+```
+
+## Probability functions, cont.
+
+By default, the probability functions give proportion of a distribution that is *less than or equal to* the given value ($P(X\le x)$). To find the proportion *greater than* a value ($P(X > x)$), include the parameter `lower.tail = FALSE` in the function call. This is equivalent to $1 - P(X \le x)$
+
+- Example: What proportion of the standard normal distribution is greater than 0.8?
+
+    ```{r, echo=T, eval=F}
+    pnorm(0.8, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pnorm(0.8, lower.tail = FALSE)
+    ```
+
+```{r}
+normal.plot(greater.x = 0.8)
+```
+
+
+## Quantile functions
+
+The `q` functions will return the value the corresponds to a given quantile. In other words, it is the value that defines the given probability of a distribution.
+
+- Example: What value is greater than 30% of a standard normal distribution?
+
+    ```{r, echo=T, eval=F}
+    qnorm(0.3)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qnorm(0.3)
+    ```
+    
+```{r}
+normal.plot(less.x=qnorm(0.3))
+```
+
+## Quantile functions, cont.
+
+The quantile functions, like the probability functions, by default will find the value that the given proportion is *less than*. To find the value that defines an upper proportion, use the `lower.tail = FALSE` parameter. 
+
+- Example: What value is less than 30% of a standard normal distribution?
+
+    ```{r, echo=T, eval=F}
+    qnorm(0.3, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qnorm(0.3, lower.tail = FALSE)
+    ```
+    
+```{r}
+normal.plot(greater.x=qnorm(0.3, lower.tail = FALSE))
+```
+
+## Relationship of probability and quantile functions
+
+The probability and quantile functions are inverses, or opposites, of each other. That is, if you pass the result of one into the other, you will get the original value back (there might be slight differences due to rounding).
+
+```{r, echo=T, eval=F}
+q <- qnorm(0.3)
+pnorm(q)
+```
+\vspace{-.4in}
+```{r, echo=F, eval=T}
+q <- qnorm(0.3)
+pnorm(q)
+```
+
+```{r, echo=T, eval=F}
+p <- pnorm(0.8)
+qnorm(p)
+```
+\vspace{-.4in}
+```{r, echo=F, eval=T}
+p <- pnorm(0.8)
+qnorm(p)
+```
+
+## Other functions
+
+We will not use the other two types of distribution functions much, if at all, in this class.
+
+- Density functions (`d`) give the value of a distribution's density function for a given point in the distribution. They are used to create the distribution plots in these slides.
+
+    ```{r, echo=T, eval=F}
+    dnorm(0.8)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    dnorm(0.8)
+    ```
+
+- Random functions (`r`) will generate random numbers drawn from the distribution. They can be used to create data for simulation studies.
+
+    ```{r, echo=T, eval=F}
+    rnorm(5)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    rnorm(5)
+    ```
+
+## Binomial distributions in R
+
+- Binomial distributions represent the number of successes in a set number of trials with exactly two possible outcomes (success/failure). 
+
+- A particular distribution is defined by two parameters, the number of trials and the probability of success for each trial. 
+
+- When using the binomial distribution functions in R, the parameters are specified by adding `size=` and `prob=` to the function call.
+
+- Recall, the possible values of a binomial process are between 0 and the number of trials (inclusive).
+
+## Flipping coins example
+
+Consider flipping a fair coin three times, counting the number of times that the flip resulted in "heads".
+
+- For this process, the number of trials is 3, the probability of success is 0.5. Possible values are 0, 1, 2, or 3.
+
+- Then, to utilize this distribution in R, we should include the parameters `size = 3` and `prob = 0.5` in the appropriate function calls.
+
+```{r}
+binomial.plot(n=3, p=0.5, x.ticks = 0:3)
+```
+
+## Cancer screening example
+
+Consider the cancer screening example from class. We are interested in the number out of 10 randomly selected subjects who get a positive result from the screening test. The probability of testing positive is 10%. 
+
+- For this process, the number of trials is 10, the probability of success is 0.1. Possible values are 0 through 10.
+
+- To utilize this distribution in R, we should include the parameters `size = 10` and `prob = 0.1` in the appropriate function calls.
+
+```{r}
+binomial.plot(n=10, p=0.1)
+```
+
+## Binomial probabilities of a range
+
+To calculate binomial probabilities, we use the `pbinom` function. This function will return the probability of getting a value less than *or equal to* the given value by default.
+
+- What is the probability of getting one or fewer (0 or 1) heads out of three coin flips?
+
+    ```{r, echo=T, eval=F}
+    pbinom(1, size=3, prob=0.5)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pbinom(1, size=3, prob=0.5)
+    ```
+
+```{r}
+binomial.plot(n=3, p=0.5, x.ticks = 0:3, less.x=1)
+```
+
+## Binomial probabilities greater than a value
+
+To calculate binomial probabilities greater than a value (not greater than *or equal to*), add the `lower.tail = FALSE` to the function call.
+
+- What is the probability of getting more than one  (2 or 3) heads out of three coin flips?
+
+    ```{r, echo=T, eval=F}
+    pbinom(1, size=3, prob=0.5, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pbinom(1, size=3, prob=0.5, lower.tail = FALSE)
+    ```
+
+```{r}
+binomial.plot(n=3, p=0.5, x.ticks = 0:3, greater.x=1)
+```
+
+## Binomial probabilities of a single value
+
+There are two methods to calculate the probability of a single value in a binomial distribution. The first method is find the probability less than or equal the value and subtract the probability less than or equal to the value minus one. What will be left is the probability of getting exactly the single value.
+
+- What is the probability of getting exactly two heads out of three coin flips?
+
+    ```{r, echo=T, eval=F}
+    pbinom(2, size=3, prob=0.5) - pbinom(1, size=3, prob=0.5)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pbinom(2, size=3, prob=0.5) - pbinom(1, size=3, prob=0.5)
+    ```
+
+```{r}
+binomial.plot(n=3, p=0.5, x.ticks = 0:3, less.x=2, less.x.2=1, less.color.2 = "red3")
+```
+
+## Binomial probabilities of a single value, cont.
+
+Alternatively, the density function can be used to find the probability of a single value.
+
+[Note: this method can only be used for discrete distributions.]
+
+- What is the probability of getting exactly two heads out of three coin flips?
+
+    ```{r, echo=T, eval=F}
+    dbinom(2, size = 3, prob = 0.5)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    dbinom(2, size = 3, prob = 0.5)
+    ```
+
+```{r}
+binomial.plot(n=3, p=0.5, x.ticks = 0:3, between.x=c(1,2))
+```
+
+## Binomial quantiles
+
+Finding quantiles in a binomial distribution is not a common problem, but if necessary, they can be found with `qbinom`.
+
+- What number or less of positive screening tests out of 10 will occur 75% of the time?
+
+    ```{r, echo=T, eval=F}
+    qbinom(0.75, size = 10, prob = 0.1)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qbinom(0.75, size = 10, prob = 0.1)
+    ```
+
+```{r}
+binomial.plot(n=10, p=0.1, less.x=qbinom(0.75, size = 10, prob = 0.1))
+```
+
+## Normal distributions in R
+
+- Normal distributions are continuous distributions representing a many kinds naturally occurring variables. 
+
+- A normal distribution is defined by it's mean and standard deviation.
+
+- The standard normal distribution (the $z$ distribution) has a mean of 0 and standard deviation of 1.
+
+- The parameters that define a distribution are specified in R functions by including `mean=` and `sd=` in the function call.
+
+- Because R defines default values for `mean` and `sd` of 0 and 1, respectively, when we want to do calculations from the standard normal distribution, we don't have to include those values.
+
+## Normal distributions, examples
+
+- The standard normal distribution (`mean=0` and `sd=1`)
+
+```{r, fig.widht = 3.5, fig.height=1.1}
+normal.plot()
+```
+
+- The heights of adult women (inches) are normally distributed with a mean of 63.7 and standard deviation of 5.96.
+
+```{r, fig.widht = 3.5, fig.height=1.1}
+normal.plot(mu=63.7, sigma=5.96)
+```
+
+## Normal probabilities
+
+To find probabilities from normal distributions, we use the function `pnorm`. By default, this function gives probabilities less than a value. [In continuous distributions $P(X=x) = 0$, so $P(X \le x) = P(X < x)$.] 
+
+- What proportion values from normal distributions are less than 1.1 standard deviations above the mean ($P(z < 1.1)$)?
+
+    ```{r, echo=T, eval=F}
+    pnorm(1.1)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pnorm(1.1)
+    ```
+
+```{r}
+normal.plot(less.x=1.1)
+```
+
+## Upper normal probabilities
+
+To find probabilities *greater than* a value, we include the `lower.tail=FALSE` parameter.
+
+- What is the probability of a randomly selected woman being taller than 5 feet (60 inches)?
+
+    ```{r, echo=T, eval=F}
+    pnorm(60, mean = 63.7, sd = 5.96, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pnorm(60, mean = 63.7, sd = 5.96, lower.tail = FALSE)
+    ```
+
+```{r}
+normal.plot(mu = 63.7, sigma = 5.96, greater.x=60)
+```
+
+## Probabilities of ranges
+
+- While there is no sense in finding the probability of a single value in a continuous distribution, there is often the need to find probabilities of ranges of values. 
+
+- In a similar manner as finding the probability of a single value in a binomial, the probability of a range of values can be found by subtracting the probability less than the lower bound from the probability lass than the upper value.
+
+- This is equivalent to $P(a < x < b) = P(x < b) - P(x<a)$
+
+Example:
+
+- What is the  proportion of values within one standard deviation of the mean?
+
+    ```{r, echo=T, eval=F}
+    pnorm(1) - pnorm(-1)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pnorm(1) - pnorm(-1)
+    ```
+
+## Probabilities of ranges, example
+
+- What is the probability of a randomly selected woman being between 5 and 6 feet tall?
+
+    ```{r, echo=T, eval=F}
+    pnorm(72, mean = 63.7, sd = 5.96) - pnorm(60, mean = 63.7, sd = 5.96)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    pnorm(72, mean = 63.7, sd = 5.96) - pnorm(60, mean = 63.7, sd = 5.96)
+    ```
+
+```{r, fig.widht = 3.5, fig.height=1.1}
+normal.plot(mu = 63.7, sigma = 5.96, less.x=72, less.x.2=60, less.color.2 = "red3")
+normal.plot(mu = 63.7, sigma = 5.96, between.x=c(60,72))
+```
+
+## Quantiles in normal distributions
+
+To find a quantile of a normal distribution, we use the `qnorm` function.
+
+- 80% of women are shorter than what height?
+
+    ```{r, echo=T, eval=F}
+    qnorm(0.8, mean = 63.7, sd = 5.96)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qnorm(0.8, mean = 63.7, sd = 5.96)
+    ```
+
+```{r}
+normal.plot(mu = 63.7, sigma = 5.96, less.x=qnorm(0.8, mean = 63.7, sd = 5.96))
+```
+
+## Upper quantiles
+
+Use the `lower.tail = FALSE` option to find quantiles corresponding to upper probabilities.
+
+- What value separates the upper 35% from the lower 65% in a standard normal distribution?
+
+    ```{r, echo=T, eval=F}
+    qnorm(0.35, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qnorm(0.35, lower.tail = FALSE)
+    ```
+
+```{r}
+normal.plot(greater.x=qnorm(0.35, lower.tail = FALSE))
+```
+
+## Upper quantiles, alternate
+
+A value that is less than $p$ proportion of a distribution is also greater than $1-p$ proportion of the distribution [this is a form of the complement rule, i.e. if $P(X > x) = p$, then $P(X < x) = 1 - p$]. This can be used as another way to find the quantile of an upper proportion.
+
+- What value separates the upper 35% from the lower 65% in a standard normal distribution?
+
+    ```{r, echo=T, eval=F}
+    qnorm(1 - 0.35)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qnorm(1-0.35)
+    ```
+
+```{r}
+normal.plot(greater.x=qnorm(1-0.35))
+```
+
+## Critical values
+
+Recall, a critical value $z_\alpha$ is the value of a standard normal distribution that delineates an upper probability of $\alpha$ from the rest of the distribution. This is a quantile of an upper proportion.
+
+- What are the critical values $z_\alpha$ and $z_{\alpha/2}$ for $\alpha = 0.05$?
+
+    ```{r, echo=T, eval=F}
+    alpha <- 0.05
+    qnorm(alpha, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    alpha <- 0.05
+    qnorm(alpha, lower.tail = FALSE)
+    ```
+
+    ```{r, echo=T, eval=F}
+    qnorm(1 - alpha/2)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qnorm(1 - alpha/2)
+    ```
+
+```{r, fig.widht = 3.5, fig.height=1.1}
+normal.plot(x=seq(-0.5, 3.1, length=500),
+            x.ticks.sd=c(0, 1, 3),
+            greater.x=1.64, greater.x.2=1.96)
+```

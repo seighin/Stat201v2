@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552234789257.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2644935633",
+    "id" : "5C5046F6",
+    "lastKnownWriteTime" : 1554731910,
+    "last_content_update" : 1554731911003,
+    "path" : "~/Dropbox/Classes - Prof/Stat 201 (Reorg 2019)/Materials/Data/code/week_09_data.Rmd",
+    "project_path" : "week_09_data.Rmd",
+    "properties" : {
+        "cursorPosition" : "34,32",
+        "scrollLine" : "14",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,113 @@
+\documentclass{article}
+
+\usepackage{shyne}
+
+% document format
+\topmargin 0in
+\oddsidemargin 0in
+\evensidemargin 0in
+\headheight 0in
+\headsep 0in
+\topskip 0in
+\textheight 9in
+\textwidth 6.5in
+\linespread{1.3}
+
+\begin{document}
+
+\begin{flushleft}
+\section*{Group Work - Week 9}
+
+\paragraph{1} The data file ``bears.csv" on D2L contains measurements of a random sample of bears from a national park. Harsh winters can be hard on a bear population, especially older bears. Park officials want to know if the mean bear age is different than the usual mean of 55 months.
+
+\begin{enumalpha}
+\item What are the null and alternative hypotheses for a test on this claim? Is this a one-sided or two-sided test? Is the claim represented by the null or alternative hypothesis?\\
+
+$\bv{H_0: \mu = 55}$ \\
+$\bv{H_a: \mu \ne 55}$ \\
+\bt{Two-sided test}\\
+\bt{All the requirements are satisfied (sample size is $\bv{> 30}$).}
+\vspace{.5in}
+
+\item Using the data set, conduct a test at the $\alpha = 0.05$ level of significance of the claim that the bear population has a different mean age of 55 months. Be sure to state your conclusion in the context of the question.\\
+
+\begin{verbatim}
+> t.test(bears$AGE, mu=55)
+
+	One Sample t-test
+
+data:  bears$AGE
+t = -2.5021, df = 53, p-value = 0.01547
+alternative hypothesis: true mean is not equal to 55
+95 percent confidence interval:
+ 34.31454 52.72249
+sample estimates:
+mean of x 
+ 43.51852 
+\end{verbatim}
+
+$\bv{t = -2.5, \, p = 0.0155 < \alpha =0.05}$\bt{. Reject }$\bv{H_0.}$\\
+\bt{There is evidence that the bear population has a different mean age than 55 months.}
+\vspace{.5in}
+
+\end{enumalpha}
+
+\newpage
+\paragraph{2} A manufacturer of flash drives wants to know if there is a difference in the reliability of their drives used in extreme conditions. A sample of 15 drives used in cold conditions ($< 32 $\textdegree F) had a mean lifespan of 41.9 months with a standard deviation of 6.3. A sample of 15 drives used in hot conditions ($> 99 $\textdegree F) had a mean lifespan of 38.4 months with a standard deviation of 5.9. Assume lifespans of flash drive are normally distributed.
+\begin{enumalpha}
+\item What are the null and alternative hypotheses for a test on this claim? Is this a one-sided or two-sided test? Are these independent or dependent samples? Are the requirements for a hypothesis test satisfied?\\
+\medskip
+$\bv{H_0: \mu_c = \mu_h \quad \text{\bt{or}} \quad \mu_c - \mu_h = 0}$ \\
+$\bv{H_a: \mu_c \ne \mu_h \quad \text{\bt{or}} \quad \mu_c - \mu_h \ne 0}$ \\
+\bt{Two-sided test, independent samples}\\
+\bt{All the requirements are satisfied (populations are normally distributed).}
+\vspace{.5in}
+
+\vspace{2.25in}
+\item Conduct an hypothesis test at the $\alpha = 0.05$ level of significance. Be sure to state your conclusion in the context of the question.\\
+\medskip
+$\ds\bv{t = \frac{\bar x_1 - \bar x_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} = \frac{41.9 - 38.4}{\sqrt{\frac{6.3^2}{15} + \frac{5.9^2}{15}}} = 1.5705}$\\
+$\ds\bv{p = 2 \times P(T > 1.57) = 2 \times 0.06936761 = 0.1387352}$\\ \medskip
+$\bv{p = 0.139 > \alpha =0.05}$\bt{. Fail to reject }$\bv{H_0.}$\\
+\bt{There is not evidence the drives in extreme cold and extreme heat have different lifespans.}
+\vspace{.5in}
+
+\end{enumalpha}
+
+\newpage
+\paragraph{3} Researchers are interested in whether meditation can lower blood pressure in people that have high blood pressure. They conduct a study on 45 patients with high blood pressure (systolic blood pressure $> 20$), measuring their systolic blood pressure at baseline and after 30 minutes of meditation. The file ``meditation\_bp.csv" on D2L contains the data.
+\begin{enumalpha}
+\item What are the null and alternative hypotheses for a test on this claim? Is this a one-sided or two-sided test? Are these independent or dependent samples? Are the requirements for a hypothesis test satisfied?\\
+
+$\bv{H_0: \mu_d = 0}$ \\
+$\bv{H_a: \mu_d < 0}$ \\
+\bt{One-sided test, dependent or paired samples}\\
+\bt{All the requirements are satisfied (sample size is $\bv{> 30}$).}
+\vspace{.5in}
+
+\item Conduct an hypothesis test at the $\alpha = 0.01$ level of significance. Be sure to state your conclusion in the context of the question.\\
+\medskip
+\begin{verbatim}
+> t.test(bp$baseline, bp$after, paired=T, alternative = "greater")
+
+	Paired t-test
+
+data:  bp$baseline and bp$after
+t = 6.3391, df = 44, p-value = 5.35e-08
+alternative hypothesis: true difference in means is greater than 0
+95 percent confidence interval:
+ 1.747533      Inf
+sample estimates:
+mean of the differences 
+               2.377778 
+\end{verbatim}
+
+$\bv{t = -6.34, \, p < 0.0001 < \alpha =0.01}$\bt{. Reject }$\bv{H_0.}$\\
+\bt{There is evidence that systolic blood pressure is lower after 30 minutes of meditation.}
+\vspace{.5in}
+\end{enumalpha}
+
+
+
+\end{flushleft}
+\end{document}

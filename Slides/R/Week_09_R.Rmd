@@ -1,0 +1,488 @@
+---
+title: "Week 9: t distribution and t-tests"
+author: 'Stat 201: Statistics I'
+date: "March 10, 2019"
+output: 
+    beamer_presentation:
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      fig.width = 4, fig.height = 1.5, fig.align = "center")
+
+library(ggplot2)
+
+set.seed(42)
+```
+
+```{r}
+normal.plot <- function(x = NULL,
+                        x.ticks.sd = (-1:1)*2,
+                        mu = 0, sigma = 1,
+                        less.x = NULL,
+                        less.x.2 = NULL,
+                        greater.x = NULL,
+                        greater.x.2 = NULL,
+                        between.x = NULL,
+                        fill.color = "cadetblue",
+                        less.color = NULL,
+                        less.color.2 = NULL,
+                        greater.color = NULL,
+                        greater.color.2 = NULL,
+                        between.color = NULL) {
+    if (is.null(x)){
+        # If no x values given, default to -3.1 to 3.1 SDs
+        l.bound <- mu - 3 * sigma
+        u.bound <- mu + 3 * sigma
+        
+        x <- seq(l.bound, u.bound, length=500)
+    } 
+
+    x.ticks <- mu + x.ticks.sd * sigma
+    x.ticks <- x.ticks[x.ticks>=min(x) & x.ticks<=max(x)]        
+    
+    # The density function for specified distribution
+    dense.func <- function(x){
+        dnorm(x, mean=mu, sd=sigma)
+    }
+    
+    # y values are the density curve
+    y <- dense.func(x)
+    
+    # Data frame for the plot
+    plot.df <- data.frame(x=x, y=y)
+    
+    # Define the plot
+    g <- ggplot(plot.df, aes(x=x, y=y))
+    
+    # Display range less than value?
+    if (!is.null(less.x)){
+        if (is.null(less.color)){
+            less.color <- fill.color
+        }
+        
+        area.less.x <- c(x[x<= less.x], less.x)
+        plot.less.df <- data.frame(x=area.less.x, y=dense.func(area.less.x))
+        
+        g <- g + geom_area(data=plot.less.df, fill=less.color, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x, y=0, xend=less.x, yend=dense.func(less.x)),
+                              color=less.color)
+        
+        x.ticks <- c(x.ticks, less.x)
+    }
+    
+    if (!is.null(less.x.2)){
+        if (is.null(less.color.2)){
+            less.color.2 <- fill.color
+        }
+        
+        area.less.x.2 <- c(x[x<= less.x.2], less.x.2)
+        plot.less.df.2 <- data.frame(x=area.less.x.2, y=dense.func(area.less.x.2))
+        
+        g <- g + geom_area(data=plot.less.df.2, fill=less.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x.2, y=0, xend=less.x.2, yend=dense.func(less.x.2)),
+                              color=less.color.2)
+        
+        x.ticks <- c(x.ticks, less.x.2)
+    }
+
+    # Display range greater than value?
+    if (!is.null(greater.x)){
+        if (is.null(greater.color)){
+            greater.color <- fill.color
+        }
+
+        area.greater.x <- c(greater.x, x[x >= greater.x])
+        plot.greater.df <- data.frame(x=area.greater.x, y=dense.func(area.greater.x))
+
+        g <- g + geom_area(data=plot.greater.df, fill=greater.color, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x, y=0, 
+                                  xend=greater.x, yend=dense.func(greater.x)),
+                              color=greater.color)
+        
+        x.ticks <- c(x.ticks, greater.x)
+    }
+
+    if (!is.null(greater.x.2)){
+        if (is.null(greater.color.2)){
+            greater.color.2 <- fill.color
+        }
+
+        area.greater.x.2 <- c(greater.x.2, x[x >= greater.x.2])
+        plot.greater.df.2 <- data.frame(x=area.greater.x.2, y=dense.func(area.greater.x.2))
+
+        g <- g + geom_area(data=plot.greater.df.2, fill=greater.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x.2, y=0, 
+                                  xend=greater.x.2, yend=dense.func(greater.x.2)),
+                              color=greater.color.2)
+        
+        x.ticks <- c(x.ticks, greater.x.2)
+    }
+
+    # Display range between values?
+    if (!is.null(between.x)){
+        if (is.null(between.color)){
+            between.color <- fill.color
+        }
+
+        area.between.x <- c(between.x[1], 
+                            x[x >= between.x[1] & x <= between.x[2]],
+                            between.x[2])
+        plot.between.df <- data.frame(x=area.between.x, y=dense.func(area.between.x))
+
+        g <- g + geom_area(data=plot.between.df, fill=between.color, alpha=.6)
+        g <- g + geom_segment(aes(x=between.x[1], y=0, 
+                                  xend=between.x[1], yend=dense.func(between.x[1])),
+                              color=between.color)
+        g <- g + geom_segment(aes(x=between.x[2], y=0, 
+                                  xend=between.x[2], yend=dense.func(between.x[2])),
+                              color=between.color)
+        
+        x.ticks <- c(x.ticks, between.x)
+    }
+
+    x.ticks <- sort(x.ticks)
+    x.ticks.labels <- paste(round(x.ticks,2))
+                            
+    # Draw density curve
+    g <- g + geom_line(size=1)
+    g <- g + theme_bw() + xlab("") + ylab("Density")
+    g <- g + scale_x_continuous(breaks=sort(x.ticks), minor_breaks = NULL,
+                                labels=x.ticks.labels)
+    
+    g
+}
+
+binomial.plot <- function(x = NULL,
+                        x.ticks = NULL,
+                        n = 10, p = 0.5,
+                        less.x = NULL,
+                        less.x.2 = NULL,
+                        greater.x = NULL,
+                        greater.x.2 = NULL,
+                        between.x = NULL,
+                        fill.color = "cadetblue",
+                        less.color = NULL,
+                        less.color.2 = NULL,
+                        greater.color = NULL,
+                        greater.color.2 = NULL,
+                        between.color = NULL) {
+    if (is.null(x)){
+        # If no x values given, default to 0 to n
+        l.bound <- - 0.51
+        u.bound <- n + 0.5 
+        
+        x <- seq(l.bound, u.bound, length=500)
+    } 
+    
+    if (is.null(x.ticks)){
+        x.ticks <- seq(round(min(x+0.01)), round(max(x)), by=2)
+    }
+
+    # The density function for specified distribution
+    dense.func <- function(x){
+        dbinom(round(x), size=n, prob=p)
+    }
+    
+    # y values are the density curve
+    y <- dense.func(x)
+    
+    # Data frame for the plot
+    plot.df <- data.frame(x=x, y=y)
+    
+    # Define the plot
+    g <- ggplot(plot.df, aes(x=x, y=y))
+    
+    # Display range less than value?
+    if (!is.null(less.x)){
+        if (is.null(less.color)){
+            less.color <- fill.color
+        }
+
+        area.less.x <- x[x<= less.x + 0.5]
+        plot.less.df <- data.frame(x=area.less.x, y=dense.func(area.less.x))
+        
+        g <- g + geom_area(data=plot.less.df, fill=less.color, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x+0.5, y=0, 
+                                  xend=less.x+0.5, yend=dense.func(less.x+0.5)),
+                              color=less.color)
+        
+        x.ticks <- c(x.ticks, less.x)
+    }
+    
+
+    if (!is.null(less.x.2)){
+        if (is.null(less.color.2)){
+            less.color.2 <- fill.color
+        }
+
+        area.less.x.2 <- x[x<= less.x.2 + 0.5]
+        plot.less.df.2 <- data.frame(x=area.less.x.2, y=dense.func(area.less.x.2))
+        
+        g <- g + geom_area(data=plot.less.df.2, fill=less.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=less.x.2+0.5, y=0, 
+                                  xend=less.x.2+0.5, yend=dense.func(less.x.2+0.5)),
+                              color=less.color.2)
+        
+        x.ticks <- c(x.ticks, less.x.2)
+    }
+
+    # Display range greater than value?
+    if (!is.null(greater.x)){
+        if (is.null(greater.color)){
+            greater.color <- fill.color
+        }
+
+        area.greater.x <- x[x >= greater.x + 0.5]
+        plot.greater.df <- data.frame(x=area.greater.x, y=dense.func(area.greater.x))
+
+        g <- g + geom_area(data=plot.greater.df, fill=greater.color, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x + 0.5, y=0, 
+                                  xend=greater.x + 0.5, yend=dense.func(greater.x+0.5)),
+                              color=greater.color)
+        
+        x.ticks <- c(x.ticks, greater.x)
+    }
+
+    if (!is.null(greater.x.2)){
+        if (is.null(greater.color.2)){
+            greater.color.2 <- fill.color
+        }
+
+        area.greater.x.2 <- x[x >= greater.x.2 + 0.5]
+        plot.greater.df.2 <- data.frame(x=area.greater.x.2, y=dense.func(area.greater.x.2))
+
+        g <- g + geom_area(data=plot.greater.df.2, fill=greater.color.2, alpha=.6)
+        g <- g + geom_segment(aes(x=greater.x.2 + 0.5, y=0, 
+                                  xend=greater.x.2 + 0.5, yend=dense.func(greater.x.2+0.5)),
+                              color=greater.2.color)
+        
+        x.ticks <- c(x.ticks, greater.x.2)
+    }
+
+    # Display range between values?
+    if (!is.null(between.x)){
+        if (is.null(between.color)){
+            between.color <- fill.color
+        }
+
+        area.between.x <- c(between.x[1] + 0.5, 
+                            x[x > between.x[1] + 0.5 & x <= between.x[2] + 0.5])
+        plot.between.df <- data.frame(x=area.between.x, y=dense.func(area.between.x))
+
+        g <- g + geom_area(data=plot.between.df, fill=between.color, alpha=.6)
+        g <- g + geom_segment(aes(x=between.x[1] + 0.5, y=0, 
+                                  xend=between.x[1] + 0.5, yend=dense.func(between.x[1] + 0.5)),
+                              color=between.color)
+        g <- g + geom_segment(aes(x=between.x[2] + 0.5, y=0, 
+                                  xend=between.x[2] + 0.5, yend=dense.func(between.x[2]+0.5)),
+                              color=between.color)
+        
+        x.ticks <- c(x.ticks, between.x)
+    }
+
+    x.ticks <- sort(x.ticks)
+    x.ticks.labels <- paste(round(x.ticks,4))
+                            
+    # Draw density curve
+    g <- g + geom_step(size=1, direction = "vh")
+    g <- g + theme_bw() + xlab("") + ylab("Density")
+    g <- g + scale_x_continuous(breaks=sort(x.ticks), minor_breaks = NULL,
+                                labels=x.ticks.labels)
+    
+    g
+}
+
+```
+
+```{r}
+hgts <- read.csv("../../Data/metro_hgts_pop.csv")
+s <- sample(hgts$x, 40)
+```
+
+## R Distribution Functions
+
+R provides four functions for many commonly used distributions. These functions have names that begin with a letter (`d`, `p`, `q` or `r`) followed by the distribution name or an abbreviation of the name (i.e. `norm` for normal).
+
+Function | Binomial | Normal | t
+------|------|------|------
+Density | `dbinom` | `dnorm` | `dt`
+Probability | `pbinom` | `pnorm` | `pt`
+Quantile | `qbinom` | `qnorm` | `qt`
+Random | `rbinom` | `rnorm` | `rt`
+
+## t distributions in R
+
+- The t distribution is similar to the standard normal distribution.
+
+- Like the standard normal, it is centered at 0 and standardized by the standard error.
+
+- The degrees of freedom ($n-1$) of the distribution must be specified.
+
+- Note: the t distribution functions have a parameter `ncp` to specify distributions that are not centered at 0. This is rarely used and can be ignored for this class.
+
+## Critical t values
+
+The critical value $t_{\alpha, df}$ is the value of a t distribution with $df$ degrees of freedom that delineates an upper probability of $\alpha$ from the rest of the distribution. This is a quantile of an upper proportion.
+
+- What are the critical values $t_{\alpha, df}$ and $t_{\alpha/2, df}$ for $\alpha = 0.05$ and 15 degrees of freedom?
+
+    ```{r, echo=T, eval=F}
+    alpha <- 0.05
+    df <- 15
+    qt(alpha, df, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    alpha <- 0.05
+    df <- 15
+    qt(alpha, df, lower.tail = FALSE)
+    ```
+
+    ```{r, echo=T, eval=F}
+    qt(alpha/2, df, lower.tail = FALSE)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    qt(alpha/2, df, lower.tail = FALSE)
+    ```
+
+## One sample t-tests with summary statistics
+
+In order to conduct a t-test with summary statistics (sample mean and standard deviation), the t-score is calculated and the p-value is found from the `pt` function.
+
+- Test whether the population mean is not equal to 80 with a sample with mean $\bar x = 76$, standard deviation of $6.4$ and sample size of $n=31$, at a significance level of $\alpha = 0.05$.
+
+    ```{r, echo=T, eval=F}
+    alpha <- 0.05
+    n <- 31
+    x.bar <- 76
+    sd <- 6.4
+    
+    t <- (x.bar - 80) / (sd / sqrt(n))
+    t
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    alpha <- 0.05
+    n <- 31
+    x.bar <- 76
+    sd <- 6.4
+    
+    t <- (x.bar - 80) / (sd / sqrt(n))
+    t
+    ```
+
+## One sample t-tests with summary statistics, cont
+
+- Test whether the population mean is not equal to 80 with a sample with mean $\bar x = 76$, standard deviation of $6.4$ and sample size of $n=31$, at a significance level of $\alpha = 0.05$.
+
+    - Remember, for two-sided tests the p-value is $2 \times P(T > t)$, or, as in this case, $2 \times P(T < t)$ if the test statistic $t$ is negative.
+
+    ```{r, echo=T, eval=F}
+    p.value <- 2 * pt(t, df=n-1)
+    p.value
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    p.value <- 2 * pt(t, df=n-1)
+    p.value
+    ```
+
+
+    Because $p = `r round(p.value,3)` < \alpha = 0.05$, reject the null hypothesis. There is evidence that the population mean is not 80.
+
+## t.test function
+
+If we have sample data, we could conduct tests by calculating summary statistics, the t-score and p-value. However, R provides a simple function for t-tests with data, `t.test`.
+
+`t.test(x, mu = 0, alternative = c("two.sided", "less", "greater"))`
+
+- `x` is a vector of sample values
+
+- `mu` is the value the sample is being compared against.
+
+- `alternative` specifies the form of the alternative hypothesis.
+
+## t.test function output
+
+```{r, echo=T, eval=F}
+t.test(x, mu=5, alternative = "less")
+```
+\vspace{-.15in}
+```{r, echo=F, eval=T}
+x <- rnorm(20, mean=4.5, sd=2)
+t.test(x, mu=5, alternative = "less")
+```
+
+## t.test function output, cont.
+
+- After the title and specification of the data, the next line of output displays the test statistic, degrees of freedom and p-value of the test. \medskip
+
+    `## t = -0.19788, df = 19, p-value = 0.4226`
+\smallskip
+
+- A description of the alternative hypothesis of the test is next. \medskip
+    
+    `## alternative hypothesis: true mean is less than 5`
+\smallskip
+
+- The confidence interval of the mean is provided. \medskip
+
+    `## 95 percent confidence interval:`
+    
+    `##      -Inf 4.816103`
+\smallskip
+
+- Finally, the sample mean is given. \medskip
+
+    `## mean of x `
+    
+    `##  3.958016 `
+\smallskip
+
+## One sample t-tests with data
+
+- Test whether the sample of trees in the built-in data set `trees` come from a population with a mean height of 80, at a significance level of $\alpha = 0.05$.
+
+    ```{r, echo=T, eval=F}
+    t.test(trees$Height, mu=80)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    t.test(trees$Height, mu=80)
+    ```
+
+## Two independent samples t-tests
+
+t-tests on two independent samples can be conducted by providing a second vector of sample values to the `t.test` function.
+
+- Test whether men's and women's heights from the `heights` data set on D2L are different.
+
+    ```{r, echo=T, eval=F}
+    t.test(heights$men, heights$women)
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    heights <- read.csv("../../Data/heights.csv")
+    t.test(heights$men, heights$women)
+    ```
+
+## Paired samples t-tests
+
+t-tests on paired samples need to add the parameter `paired = TRUE`.
+
+- Test whether exam scores from the `scores` data set on D2L improved from the midterm to the final exam.
+
+    ```{r, echo=T, eval=F}
+    t.test(scores$final, scores$mid, paired=TRUE, alternative="greater")
+    ```
+    \vspace{-.15in}
+    ```{r, echo=F, eval=T}
+    scores <- read.csv("../../Data/scores.csv")
+    t.test(scores$final, scores$mid, paired=TRUE, 
+           alternative="greater")
+    ```
+

@@ -1,0 +1,55 @@
+---
+title: "Create data sets for Week 8"
+author: 'Stat 201: Statistics I'
+date: "April 8, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+set.seed(42)
+```
+
+# Smoking data
+
+```{r}
+bl.cpd.mean <- 14.6
+
+ctrl.n <- 48
+ctrl.cpd.mean <- 12.5
+
+trt.n <- 48
+group1.cpd.mean <- 11
+group.cpd.diff <- -1
+
+cpd.sd <- 2
+
+ctrl.cpd <- rpois(ctrl.n, ctrl.cpd.mean)
+
+group1.cpd <- rpois(trt.n, group1.cpd.mean)
+group2.cpd <- group1.cpd + round(rnorm(trt.n, mean = group.cpd.diff, sd=cpd.sd))
+
+cpd <- data.frame(control=ctrl.cpd, group.A=group1.cpd, group.B=group2.cpd)
+write.csv(cpd, "../smoking.csv", row.names = FALSE)
+
+ctrl.cpd
+sd(ctrl.cpd)
+
+group1.cpd
+sd(group1.cpd)
+group2.cpd
+sd(group2.cpd)
+```
+
+```{r}
+t.test(ctrl.cpd, mu=bl.cpd.mean)
+
+t.test(ctrl.cpd, group1.cpd, alternative = "greater")
+
+t.test(group1.cpd, group2.cpd)
+
+t.test(group1.cpd, group2.cpd, paired = T)
+
+```

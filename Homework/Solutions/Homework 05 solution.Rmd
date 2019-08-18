@@ -1,0 +1,50 @@
+---
+title: "Homework - Week 5"
+author: "Your name here"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Questions marked with "(OS3: X.X)" are from the textbook with "X.X" as the exercise number. The answers to the odd questions (odd by book numbering that is) will be in the back of the book.
+
+1. Consider the builtin dataset `iris`. 
+
+    a. What is the 5 number summary of the `Sepal.Length` variable (you can just use the `summary()` funtion). Create a boxplot for the variable.
+    
+    b. What is the 5 number summary of the `Petal.Length` variable. Create a boxplot for the variable.
+    
+    c. What is the z-score for a sepal length of 6.5 cm? What is the z-score for a petal length of 6.5 cm? 
+    
+    d. Which is longer relative to their populations: a sepal 6.5 cm long or a petal 6.5 cm long? 
+
+
+
+2. Load the dataset `bears.csv` from D2L.
+
+    a. What is the 5 number summary of the `CHEST` variable. Create a boxplot for the variable.
+    
+    b. What chest size is the 42nd percentile?
+    
+    c. What percentile is a chest size of 49?
+    
+
+3. (OS3: 2.33) At a university, 13\% of students smoke.
+   
+    a. Calculate the expected number of smokers in a random sample of 100 students 
+from this university.
+
+    b. The university gym opens at 9 am on Saturday mornings. One Saturday morning at 8:55 am there are 27 students outside the gym waiting for it to open. Should you use the same approach from part (a) to calculate the expected number of smokers among these 27 students?
+
+
+4. (OS3: 2.34) Consider the following card game with a well-shuffled deck of cards. If you draw a red card, you win nothing. If you get a spade, you win \$5. For any club, you win \$10 plus an extra \$20 for the ace of clubs.
+
+    a. Create a probability model for the amount you win at this game. Also, find the expected winnings for a single game and the standard deviation of the winnings.
+
+    b. What is the maximum amount you would be willing to pay to play this game? Explain your reasoning.
+
+
+5. (OS3: 2.37) A portfolio's value increases by 18\% during a financial boom and by 9\% during normal times. It decreases by 12\% during a recession. What is the expected return on this portfolio if each scenario is equally likely?
+

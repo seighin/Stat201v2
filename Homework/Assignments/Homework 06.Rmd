@@ -1,0 +1,194 @@
+---
+title: "Homework - Week 6"
+author: "Your name here"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Questions marked with "(OS3: X.X)" are from the textbook with "X.X" as the exercise number. The answers to the odd questions (odd by book numbering that is) will be in the back of the book.
+
+1. (OS3: 3.25) Data collected 
+by the Substance Abuse and Mental Health Services Administration (SAMSHA) 
+suggests that 69.7\% of 18-20 year olds consumed alcoholic beverages in 2008.
+
+    a. Suppose a random sample of ten 18-20 year olds is taken. Is the use 
+of the binomial distribution appropriate for calculating the probability that 
+exactly six consumed alcoholic beverages? Explain.
+
+    b. Calculate the probability that exactly 6 out of 10 randomly sampled 18-
+20 year olds consumed an alcoholic drink.
+
+    c. What is the probability that exactly four out of ten 18-20 year 
+olds have \textit{not} consumed an alcoholic beverage?
+
+    d. What is the probability that at most 2 out of 5 randomly sampled 18-20 
+year olds have consumed alcoholic beverages?
+
+    e. What is the probability that at least 1 out of 5 randomly sampled 18-20 
+year olds have consumed alcoholic beverages?
+
+
+2. (OS3: 3.26) The National Vaccine 
+Information Center estimates that 90\% of Americans have had chickenpox by 
+the time they reach adulthood. 
+
+    a. Is the use of the binomial distribution appropriate for calculating the probability that exactly 97 out of 100 randomly sampled American adults had chickenpox during childhood.
+
+    b. Calculate the probability that exactly 97 out of 100 randomly sampled 
+American adults had chickenpox during childhood.
+
+    c. What is the probability that exactly 3 out of a new sample of 100 
+American adults have \textit{not} had chickenpox in their childhood?
+
+    d. What is the probability that at least 1 out of 10 randomly sampled 
+American adults have had chickenpox?
+
+    e. What is the probability that at most 3 out of 10 randomly sampled 
+American adults have \textit{not} had chickenpox?
+
+
+3. (OS3: 3.27) We 
+learned in Exercise 1 that about 70\% of 18-20 
+year olds consumed alcoholic beverages in 2008. We now consider a random 
+sample of fifty 18-20 year olds.
+
+    a. How many people would you expect to have consumed alcoholic beverages? 
+And with what standard deviation?
+
+    b. Would you be surprised if there were 45 or more people who have 
+consumed alcoholic beverages?
+
+    c. What is the probability that 45 or more people in this sample have 
+consumed alcoholic beverages? How does this probability relate to your answer 
+to part (b)?
+
+
+
+4. (OS3: 3.32) A 2005 Gallup Poll found that 7\% of 
+teenagers (ages 13 to 17) suffer from arachnophobia and are extremely afraid 
+of spiders. At a summer camp there are 10 teenagers sleeping in each tent. 
+Assume that these 10 teenagers are independent of each other.
+
+    a.  Calculate the probability that at least one of them suffers from 
+arachnophobia.
+
+    b. Calculate the probability that exactly 2 of them suffer from 
+arachnophobia.
+
+    c. Calculate the probability that at most 1 of them suffers from 
+arachnophobia. 
+
+    d. If the camp counselor wants to make sure no more than 1 teenager in 
+each tent is afraid of spiders, does it seem reasonable for him to randomly 
+assign teenagers to tents?
+
+
+5. (OS3: 3.34) Sickle cell anemia is a 
+genetic blood disorder where red blood cells lose their flexibility and 
+assume an abnormal, rigid, ``sickle" shape, which results in a risk of 
+various complications. If both parents are carriers of the disease, then a 
+child has a 25\% chance of having the disease, 50\% chance of being a 
+carrier, and 25\% chance of neither having the disease nor being a carrier. 
+If two parents who are carriers of the disease have 3 children, what is the 
+probability that 
+
+    a. two will have the disease?
+
+    b. none will have the disease?
+
+    c. at least one will neither have the disease nor be a carrier?
+
+    d. the first child with the disease will the be $3^{rd}$ child?
+
+
+6. (OS3: 3.3 a-g) Sophia who took the Graduate Record 
+Examination (GRE) scored 160 on the Verbal Reasoning section and 157 on the 
+Quantitative Reasoning section. The mean score for Verbal Reasoning section 
+for all test takers was 151 with a standard deviation of 7, and the mean 
+score for the Quantitative Reasoning was 153 with a standard deviation of 
+7.67. Suppose that both distributions are nearly normal. 
+
+    a. Write down the short-hand for these two normal distributions.
+
+    b. What is  Sophia's Z-score on the Verbal Reasoning section? On the 
+Quantitative Reasoning section? Draw a standard normal distribution curve and 
+mark these two Z-scores.
+
+    c. What do these Z-scores tell you?
+
+    d. Relative to others, which section did she do better on?
+
+    e. Find her percentile scores for the two exams.
+
+    f. What percent of the test takers did better than her on the Verbal 
+Reasoning section? On the Quantitative Reasoning section?
+
+    g. Explain why simply comparing raw scores from the two sections could
+lead to an incorrect conclusion as to which section a student did better on.
+
+
+7. (OS3: 3.4 a-e) In triathlons, it 
+is common for racers to be placed into age and gender groups. Friends Leo and 
+Mary both completed the Hermosa Beach Triathlon, where Leo competed in the 
+\textit{Men, Ages 30 - 34} group while Mary competed in the \textit{Women, 
+Ages 25 - 29} group. Leo completed the race in 1:22:28 (4948 seconds), while 
+Mary completed the race in 1:31:53 (5513 seconds). Obviously Leo finished 
+faster, but they are curious about how they did within their respective 
+groups. Can you help them? Here is some information on the performance of 
+their groups:
+\begin{itemize}
+\setlength{\itemsep}{0mm}
+\item The finishing times of the \textit{Men, Ages 30 - 34} group has a mean 
+of 4313 seconds with a standard deviation of 583 seconds.
+\item The finishing times of the \textit{Women, Ages 25 - 29} group has a 
+mean of 5261 seconds with a standard deviation of 807 seconds.
+\item The distributions of finishing times for both groups are approximately 
+Normal.
+\end{itemize}
+Remember: a better performance corresponds to a faster finish.
+
+    a. Write down the short-hand for these two normal distributions.
+
+    b. What are the Z-scores for Leo's and Mary's finishing times? What do 
+these Z-scores tell you?
+
+    c. Did Leo or Mary rank better in their respective groups? Explain your 
+reasoning.
+
+    d. What percent of the triathletes did Leo finish faster than in his group?
+
+    e. What percent of the triathletes did Mary finish faster than in her 
+group?
+
+
+8. (OS3: 3.5) In Exercise 6 we 
+saw two distributions for GRE scores: $N(\mu=151, \sigma=7)$ for the verbal 
+part of the exam and $N(\mu=153, \sigma=7.67)$ for the quantitative part. Use 
+this information to compute each of the following:
+
+    a. The score of a student who scored in the $80^{th}$ percentile on the 
+Quantitative Reasoning section.
+
+    b. The score of a student who scored worse than 70\% of the test takers in 
+the Verbal Reasoning section.
+
+
+9. (OS3: 3.10) Heights of 10 year olds, 
+regardless of gender, closely follow a normal distribution with mean 55 
+inches and standard deviation 6 inches.
+
+    a. What is the probability that a randomly chosen 10 year old is shorter 
+than 48 inches?
+
+    b. What is the probability that a randomly chosen 10 year old is between 
+60 and 65 inches?
+
+    c. If the tallest 10\% of the class is considered ``very tall", what is 
+the height cutoff for ``very tall"?
+
+    d. The height requirement for \textit{Batman the Ride} at Six Flags Magic 
+Mountain is 54 inches. What percent of 10 year olds cannot go on this ride?
+

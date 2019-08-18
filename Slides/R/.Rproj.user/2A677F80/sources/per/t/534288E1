@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554132244480.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "644956380",
+    "id" : "534288E1",
+    "lastKnownWriteTime" : 1551659755,
+    "last_content_update" : 1555864936058,
+    "path" : "~/Dropbox/Classes - Prof/Stat 201 (Reorg 2019)/Materials/Slides/R/Week_06_R.Rmd",
+    "project_path" : "Week_06_R.Rmd",
+    "properties" : {
+        "cursorPosition" : "323,0",
+        "ignored_words" : "quantile,quantiles\n",
+        "scrollLine" : "293"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

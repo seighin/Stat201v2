@@ -1,0 +1,97 @@
+---
+title: "Homework - Week 11"
+author: "Your name here"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Questions marked with "(OS3: X.X)" are from the textbook with "X.X" as the exercise number. The answers to the odd questions (odd by book numbering that is) will be in the back of the book.
+
+1. (OS3: 7.29) The following 
+regression output is for predicting annual murders per million from percentage 
+living in poverty in a random sample of 20 metropolitan areas.
+\begin{center}
+\begin{tabular}{rrrrr}
+    \hline
+            & Estimate  & Std. Error    & t value   & Pr($>$$|$t$|$) \\ 
+    \hline
+(Intercept) & -29.901   & 7.789         & -3.839    & 0.001 \\ 
+poverty\%   & 2.559     & 0.390         & 6.562     & 0.000 \\ 
+   \hline
+\end{tabular}
+\hfill $s = 5.512 \hspace{1cm} R^2 = 70.52\% \hspace{1cm} R^2_{adj} = 68.89\%$ \hfill \\
+\end{center}
+
+
+    a. Write out the linear model.
+
+
+    b. Interpret the intercept.
+
+
+    c. Interpret the slope.
+
+
+    d. Interpret $R^2$.
+
+
+    e. Calculate the correlation coefficient.
+
+
+
+2. (OS3: 7.41 a-b) Exercise 7.29 presents regression output from a model for 
+predicting annual murders per million from percentage living in poverty based on 
+a random sample of 20 metropolitan areas. The model output is also provided below.
+\begin{center}
+\begin{tabular}{rrrrr}
+    \hline
+            & Estimate  & Std. Error    & t value   & Pr($>$$|$t$|$) \\ 
+    \hline
+(Intercept) & -29.901   & 7.789         & -3.839    & 0.001 \\ 
+poverty\%   & 2.559     & 0.390         & 6.562     & 0.000 \\ 
+    \hline
+\end{tabular}
+\hfill $s = 5.512 \hspace{1cm} R^2 = 70.52\% \hspace{1cm} R^2_{adj} = 68.89\%$ \hfill \\
+\end{center}
+
+    a. What are the hypotheses for evaluating whether poverty percentage is a significant predictor of murder rate?
+
+
+    b. State the conclusion of the hypothesis test from part (a) in context of the 
+data.
+
+
+3. Consider the built-in dataset `trees`. It contains heights (ft), girth (in) and volumes (ft$^3$) of a sample of black cherry trees. Suppose we wish to be able to predict tree volume given a tree's height.
+
+    a. Create a scatterplot of heights and volumes of trees.
+    
+    
+    b. What is the correlation between height and volume of trees? Is the correlation statistically significant? How would you generally describe the strength of correlation?
+    
+    
+    c. Create a regression model of the relationship of heights and volumes of trees, with height as the predictor variable. What is the regression line equation? Is the model statistically significant?
+
+
+    d. What is the predicted volume of a tree that is 84 feet tall? Is this an appropriate prediction?
+    
+
+    
+4. Suppose now we wish to be able to predict tree volume given a tree's girth.
+
+    a. Create a scatterplot of girths and volumes of trees.
+    
+    
+    b. What is the correlation between girth and volume of trees? Is the correlation statistically significant? How would you generally describe the strength of correlation?
+    
+    
+    c. Create a regression model of the relationship of girths and volumes of trees, with girth as the predictor variable. What is the regression line equation? Is the model statistically significant?
+
+
+    d. What is the predicted volume of a tree that has a girth of 23 inches? Is this an appropriate prediction?
+    
+
+5. Suppose you have access to both the height and girth of a tree. Based on the models developed above, which measurement should you use to make a prediction of volume? Why?
+

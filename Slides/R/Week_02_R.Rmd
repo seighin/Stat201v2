@@ -1,0 +1,160 @@
+---
+title: "Week 2: Using R Markdown"
+author: "Stat 201: Statistics I"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Using R Markdown
+
+Markdown is a simplified text formatting markup language (markup, markdown, get it?). In other words, it is way to create a document with basic formatting specified with simple text additions. R Markdown is a way to integrate R code and output into a document formatted by Markdown.
+
+## Finding help with R Markdown
+
+There are many resources for learning Markdown and R Markdown.
+
+- In RStudio, select from the menu `Help > Markdown Quick Reference`. This lists many of the most used Markdown codes and should be sufficient for what we will do in the class.
+
+- A more in-depth look at R Markdown can be found at: https://rmarkdown.rstudio.com/lesson-1.html. This covers using R Markdown within RStudio from installation to advanced uses.
+
+- Documentation for `knitr`, the package that constructs R Markdown files can be found at: https://yihui.name/knitr/. This outlines all of the many options for specifying the behavior of R Markdown. Should not be necessary for this class, but a good reference if you continue using R Markdown in the future.
+
+## R Markdown basics
+
+### Document title, author and data
+
+If you entered a document title and author in the new R Markdown file dialog, you will notice section at the top of the R Markdown file that looks something like,
+
+```
+---
+title: "My document"
+author: "My name"
+output: pdf_document
+---
+``` 
+
+If you didn't fill out those values in the dialog, you can still add them after the file is created by following the format above. You can also add a date in a similar manner. Make sure to leave the output line as is.
+
+```
+---
+title: "My document"
+author: "My name"
+date: "Today"
+output: pdf_document
+---
+``` 
+
+### Paragraphs
+
+In Markdown, lines of text that are separated by only a carriage return (i.e. hitting `Enter` once) will be considered part of the same paragraph will be displayed in the same line (unless, of course, it is at the right edge of the page).
+
+For example,
+```
+Roses
+are
+red.
+```
+will be displayed as:
+
+Roses
+are
+red.
+
+To force an actual line break, end a line with 2 or more spaces:
+```
+Roses are red.  <- 2 spaces
+Violets are blue.
+```
+$\implies$
+
+Roses are red.  
+Violets are blue.
+
+Or, you can put a blank line in between text to start a new paragraph with spacing:
+```
+Roses are red.
+
+Violets are blue.
+```
+$\implies$
+
+Roses are red.
+
+Violets are blue.
+
+### Headers
+
+There are three levels of headers that are invoked by preceding text with one, two or three haskmarks (`#`). 
+
+```
+# Header 1
+
+## Header 2
+
+### Header 3
+```
+$\implies$
+
+# Header 1
+
+## Header 2
+
+### Header 3
+
+Headers need to be at the beginning of a line, i.e. they should be proceeded by a blank line.
+
+### Lists
+
+Bullet lists can be specified by beginning a line with one of a number of characters and a space. Dashes (`-`), pluses (`+`) or asterisks (`*`) all work. Numbered lists are started with a number (or a letter) with a period (`.`) and a space. In both cases, sub-lists can be created by indenting the line (pressing `Tab` before any text). Similarly, indenting a paragraph of text will keep it as part of that item (the left margin will match that of the item).
+
+```
+- Item 1
+    
+    This is some text that "belongs" to Item 1 and will be displayed indented. Therefore, visuually, it will be clear the paragraph is part of the item.
+    
+* Item 2
++ Item 3
+    + Subitem 1
+    * Subitem 2
+```
+$\implies$
+
+- Item 1
+    
+    This is some text that "belongs" to Item 1 and will be displayed indented. Therefore, visuually, it will be clear the paragraph is part of the item.
+    
+* Item 2
++ Item 3
+    + Sub-item 1
+    * Sub-item 2
+
+```    
+1. First item
+    a. Subitem a
+    b. Subitem b
+2. Second item
+```
+$\implies$
+
+1. First item
+    a. Sub-item a
+    b. Sub-item b
+2. Second item
+
+### Italics and bold
+
+Words or phrases can be displayed in an _italic_ font by surrounding the text to be italicized with a single underscore (`_`) or asterisk (`*`). Similarly, text can be **bolded** by surrounding it with _2_ underscores or asterisks.
+
+```
+Sometimes you want to _emphasize_ text. Sometimes you want to really **emphasize** it.
+```
+$\implies$
+
+Sometimes you want to _emphasize_ text. Sometimes you want to really **emphasize** it.
+
+## More R Markdown
+
+Markdown is capible of much more. It provides simple ways to include images and tables, links to webpages and more. Instructions for those can be found in the references I included above. Also, if you are familar with LaTeX, you can include LaTeX code directly in Markdown files. Not all LaTeX gets rendered as expected, but the basic math formatting commends all work well. 

@@ -1,0 +1,154 @@
+---
+title: "Homework - Week 11"
+author: "Your name here"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Questions marked with "(OS3: X.X)" are from the textbook with "X.X" as the exercise number. The answers to the odd questions (odd by book numbering that is) will be in the back of the book.
+
+1. (OS3: 7.29) The following 
+regression output is for predicting annual murders per million from percentage 
+living in poverty in a random sample of 20 metropolitan areas.
+\begin{center}
+\begin{tabular}{rrrrr}
+    \hline
+            & Estimate  & Std. Error    & t value   & Pr($>$$|$t$|$) \\ 
+    \hline
+(Intercept) & -29.901   & 7.789         & -3.839    & 0.001 \\ 
+poverty\%   & 2.559     & 0.390         & 6.562     & 0.000 \\ 
+   \hline
+\end{tabular}
+\hfill $s = 5.512 \hspace{1cm} R^2 = 70.52\% \hspace{1cm} R^2_{adj} = 68.89\%$ \hfill \\
+\end{center}
+
+
+    a. Write out the linear model.
+
+        $\hat y = -29.901 + 2.559 x$ \quad or \quad $\widehat {murders} = -29.901 + 2.559 (poverty\%)$ 
+
+    b. Interpret the intercept.
+    
+        **The intercept (-29.901) is the predicted annual murders per million when the poverty rate is 0. However, since the intercept is negative, this interpretation is meaningless, as is often the case.**
+
+    c. Interpret the slope.
+
+        **The slope (2.559) is the predicted amount the annual murders per million will increase for each unit increase (+1) of the poverty percentage.**
+
+    d. Interpret $R^2$.
+
+        **$R^2$ (70.52) is the approximate percentage of the variation of the response variable (annual murders per million) that can be explained by the association with the predictor variable (poverty %).**
+
+    e. Calculate the correlation coefficient.
+
+        $r = \sqrt{R^2} = \sqrt{0.7052} = 0.8398$
+
+
+2. (OS3: 7.41 a-b) Exercise 7.29 presents regression output from a model for 
+predicting annual murders per million from percentage living in poverty based on 
+a random sample of 20 metropolitan areas. The model output is also provided below.
+\begin{center}
+\begin{tabular}{rrrrr}
+    \hline
+            & Estimate  & Std. Error    & t value   & Pr($>$$|$t$|$) \\ 
+    \hline
+(Intercept) & -29.901   & 7.789         & -3.839    & 0.001 \\ 
+poverty\%   & 2.559     & 0.390         & 6.562     & 0.000 \\ 
+    \hline
+\end{tabular}
+\hfill $s = 5.512 \hspace{1cm} R^2 = 70.52\% \hspace{1cm} R^2_{adj} = 68.89\%$ \hfill \\
+\end{center}
+
+    a. What are the hypotheses for evaluating whether poverty percentage is a significant predictor of murder rate?
+
+        $H_0: \beta_1 = 0$
+        
+        $H_a: \beta_1 \ne 0$
+
+    b. State the conclusion of the hypothesis test from part (a) in context of the 
+data.
+
+        **p < 0.05. Reject the null hypothesis. There is evidence that poverty percentage is a significant predictor of murder rate.**
+
+
+3. Consider the built-in dataset `trees`. It contains heights (ft), girth (in) and volumes (ft$^3$) of a sample of black cherry trees. Suppose we wish to be able to predict tree volume given a tree's height.
+
+    a. Create a scatterplot of heights and volumes of trees.
+    
+        ```{r}
+        plot(trees$Height, trees$Volume)
+        ```
+    
+    b. What is the correlation between height and volume of trees? Is the correlation statistically significant? How would you generally describe the strength of correlation?
+    
+        ```{r}
+        cor.test(trees$Height, trees$Volume)
+        ```
+        
+        **p = 0.0003784 < 0.05. The correlation is statisically significant. A correlation of approximately 0.6 indicates a moderate correlation.**
+        
+    
+    c. Create a regression model of the relationship of heights and volumes of trees, with height as the predictor variable. What is the regression line equation? Is the model statistically significant?
+
+        ```{r}
+        summary(lm(Volume ~ Height, data=trees))
+        ```
+
+        $\hat y = -87.1236 + 1.5433 x$
+        
+        **p = 0.0003784 < 0.05. The model is statisically significant.**
+        
+    d. What is the predicted volume of a tree that is 84 feet tall? Is this an appropriate prediction?
+    
+        ```{r}
+        -87.1236 + 1.5433 * 84
+        
+        range(trees$Height)
+        ```
+
+        **The predicted volume for a tree 84 ft tall is 42.5136 cubic ft. The range of heights used to create the model is 63 to 87 ft, so using 84 ft for a prediction is appropriate.**
+    
+4. Suppose now we wish to be able to predict tree volume given a tree's girth.
+
+    a. Create a scatterplot of girths and volumes of trees.
+    
+        ```{r}
+        plot(trees$Girth, trees$Volume)
+        ```
+    
+    b. What is the correlation between girth and volume of trees? Is the correlation statistically significant? How would you generally describe the strength of correlation?
+    
+        ```{r}
+        cor.test(trees$Girth, trees$Volume)
+        ```
+        
+        **p < 0.0001 < 0.05. The correlation is statisically significant. A correlation of approximately 0.97 indicates a strong correlation.**
+        
+    
+    c. Create a regression model of the relationship of girths and volumes of trees, with girth as the predictor variable. What is the regression line equation? Is the model statistically significant?
+
+        ```{r}
+        summary(lm(Volume ~ Girth, data=trees))
+        ```
+
+        $\hat y = -36.9435 + 5.0659 x$
+        
+        **p < 0.0001 < 0.05. The model is statisically significant.**
+
+
+    d. What is the predicted volume of a tree that has a girth of 23 inches? Is this an appropriate prediction?
+    
+        ```{r}
+        -36.9435 + 5.0659 * 23
+        
+        range(trees$Girth)
+        ```
+
+        **The predicted volume for a tree with a 23 in girth is 79.5722 cubic ft. The range of girths used to create the model is 8.3 to 20.6 in, so using 23 in for a prediction is not appropriate.**
+
+5. Suppose you have access to both the height and girth of a tree. Based on the models developed above, which measurement should you use to make a prediction of volume? Why?
+
+    **$R^2$ for the height model is 0.3579 and 0.9353 for the girth model. The greater coefficient of determination for the girth model indicates that predictions from this model are more accurate.** 

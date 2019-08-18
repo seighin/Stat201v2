@@ -1,0 +1,113 @@
+---
+title: "Week 1: Introduction to R and RStudio"
+author: "Stat 201: Statistics I"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Installing R and RStudio
+
+
+- R: https://www.r-project.org/
+- RStudio: https://www.rstudio.com/
+- R markdown: TeX compilers are necessary to create PDFs from R markdown.
+    - Windows: https://miktex.org/
+    - Mac: http://www.tug.org/mactex/
+    
+R must be installed before RStudio. The TeX compiler can be installed anytime.
+
+# Using RStudio
+
+The RStudio window is divided into sections or panes. There can be up to four panes, but sometimes there will be fewer displayed. 
+
+The positions of the panes can be changed by the **workspace panes** menu located in the toolbar:
+
+\includegraphics[width=4.5in]{images/week01_workspace_panes}
+
+The relative sizes of the sections can be adjusted by dragging the divider bars or by using the maximize/minimize buttons on each pane:
+
+\includegraphics[width=3.5in]{images/week01_pane_minmax}
+
+While we will eventually utilize many of the available panes, initially we are concerned with just two: the **console** pane and the **source** pane.. 
+
+## The Console pane
+
+The console pane contains an interactive R session. We will be able to type R commands into the console and see immediate results.
+
+\includegraphics[width=3in]{images/week01_console}
+
+Note the version of R we are working with. This is usually not important, but can sometimes be relevant if there are problems.
+
+Commands are entered at the console prompt (**>**). We don't know any R commands yet, but we can start by asking R to calculate values for us. 
+
+- At the prompt type `2 + 3` and hit enter. R will give us the answer below and display a new prompt for further commands (ignore the `[1]` for now).
+
+\includegraphics[width=1.5in]{images/week01_2plus3}
+
+Note: Going forward in this and similar documents, when demonstrating R commands to be entered in the console or scripts (see below), the commands will be displayed in a grey box, without the prompt, and results we be displayed below, as such:
+```{r}
+2+3
+```
+
+## The Source pane
+
+The source pane is used to create and edit various kinds of R program files.
+
+The simplest kind of R file is an **R script**. With script files we can enter and save sequences of R commands. These commands are not automatically executed, so you won't get immediate results.
+
+- From the menu select `File > New File > R Script`.
+- Enter some R commands (such as: `2+3`) hitting enter after each.
+- You can save the file if you wish. It is a good habit to save the file early. Then, any changes can be saved by simply hitting `Ctrl-S`.
+
+To run commands from the script file, move the cursor to the line you wish to run and click the run button. The command and the results will be displayed in the console pane. To run multiple commands, select the lines you wish to execute and click the run button. To run the whole script file, click on the `Source` button.
+
+\includegraphics[width=4in]{images/week01_new_script}
+
+## R markdown
+
+R markdown is another R file type. It allows you to combine R code, results of R commands (such as graphs and tables) and text and graphics into one document. We will be using R markdown files extensively during the course.
+
+- To create a new R markdown file, `File > New File > R markdown...`
+    
+    \includegraphics[width=3in]{images/week01_new_markdown}
+
+- You can enter a document title and author, though this can also be done later.
+- Select PDF as the default output.
+- Click `OK`. If this is the first time creating a R markdown file on a computer, you will likely see a dialog requesting to install packages. Click `Yes`. It will take a few minutes.
+
+    \includegraphics[width=3.5in]{images/week01_markdown_packages}
+
+    Note: We will talk more about packages later in the course. For now, packages are a way to add new functionality to the R language.
+    
+- When all the packages have finished installing (this could take several minutes), a new R markdown file will open in the Source pane. Unlike a new script file, new R markdown files begin with some default content. Save the document (the location and name don't matter now, but you might want to create a folder on your H drive for the class).
+
+- To create the final document (in our case a PDF), click on the `Knit` button at the top of the Source pane.
+    
+    \includegraphics[width=4in]{images/week01_knit}
+    
+- If all goes well, the finished PDF file will be saved in the same folder as the R markdown folder, and opened in a new window.
+
+## If all doesn't go well
+
+In order to produce a PDF, RStudio uses an external LaTeX compiler (TeX is a page layout and math formatting system). On Windows this compiler is MikTex. If you have a problem knitting your first R markdown PDF, it is likely an issue with the LaTeX compiler and packages. LaTeX also uses packages to provide extra functionality. MikTex should automatically install the necessary packages, but that does not happen in certain circumstances (like on school computers). To solve this...
+
+- Click on the gear icon next to the Knit button. Select `Output Options...`
+- Select the `Advanced` tab and make sure the `Keep tex source file used to produce PDF` box is checked. Click `OK`
+
+    \includegraphics[width=3in]{images/week01_keep_tex}
+
+- Click the `Knit` button. It will fail again.
+- From the Windows Start menu, find the MikTex folder and open the TeXworks application.
+- From TeXworks, open the TeX file we just created. It will be located in the same folder and have to same name as our R markdown folder.
+- Click on the green arrow button on the left side of the toolbar. TeXworks will now try to compile the document. When it encounters a package not yet installed, it will ask to install it. Make sure to install it for only yourself, not all users which requires admin permissions.
+
+    \includegraphics[width=3in]{images/week01_install_latex_package}
+    
+- After all the packages have been installed and TeXworks produces a PDF, you should be able to go back to RStudio and successfully knit a document directly.
+
+# Using R markdown
+
+We will go into more detail on how to create useful R markdown documents over the course of the semester. You can find basic info on formatting R markdown from examining the new file content, selecting `Markdown Quick Reference` from the RStudio `Help` menu or one of the many tutorials online.
