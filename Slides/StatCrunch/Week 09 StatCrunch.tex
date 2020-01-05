@@ -1,0 +1,169 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Week 9]{Stat 201: Statistics I\\ Week 9 StatCrunch}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[11/10/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+  
+
+\begin{document}
+
+\frame{\titlepage}
+
+% Week 9
+\setcounter{section}{8}
+\section{Inference for Numerical Data}
+
+%
+% Section 9.1
+%
+\subsection{One sample hypothesis tests for means}
+
+
+%%%%%%%%%%
+\begin{frame}{Hypothesis tests for a mean in StatCrunch}
+
+\begin{block}{}
+\large
+\begin{itemize}
+\item Stat $\to$ T Stats $\to$ One Sample $\to$ With Summary\\ (or $\to$ With Data)
+\item Enter ``Sample mean", ``Sample std. dev." and ``Sample size"\\
+(or select column which contains data)
+\item Select ``Hypothesis test for $\mu$"
+\item Enter the appropriate values for null and alternative hypotheses.
+\item Click ``Compute!"
+\item The test statistic and p-value are found in ``T-Stat" and ``P-value"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%
+% Section 9.2
+%
+\subsection{Two sample hypothesis tests for means}
+
+%%%%%%%%%%
+\begin{frame}{Hypothesis tests for two means in StatCrunch}
+
+\begin{block}{}
+\large
+\begin{itemize}
+\item Stat $\to$ T Stats $\to$ Two Samples $\to$ With Summary
+\item Enter ``Sample mean", ``Sample std. dev." and ``Sample size" for both samples
+\item Leave ``Pool variances" unchecked
+\item Select ``Hypothesis test for $\mu_1 - \mu_2$"
+\item The null hypothesis should always be $H_0: \mu_1 - \mu_2 = 0$
+\item Enter the appropriate value for the alternative hypothesis.
+\item Click ``Compute!"
+\item The test statistic and p-value are found in ``T-Stat" and ``P-value"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Confidence intervals for difference of means in StatCrunch}
+
+\begin{block}{}
+\large
+\begin{itemize}
+\item Stat $\to$ T Stats $\to$ Two Samples $\to$ With Summary
+\item Enter ``Sample mean", ``Sample std. dev." and ``Sample size" for both samples
+\item Leave ``Pool variances" unchecked
+\item Select ``Confidence interval for $\mu_1 - \mu_2$"
+\item Enter the appropriate confidence level. 
+\begin{itemize}
+\item Remember, for one-sided tests, the confidence level is (1 -2$\alpha$)\%.
+\end{itemize}
+\item Click ``Compute!"
+\item The confidence interval bounds are found in ``L. Limit" and\\ ``U. Limit"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%
+% Section 9.3
+%
+\subsection{Hypothesis tests for paired samples}
+
+
+%%%%%%%%%%
+\begin{frame}{Hypothesis tests for matched pairs in StatCrunch}
+
+\begin{block}{}
+\large
+\begin{itemize}
+\item Stat $\to$ T Stats $\to$ Paired
+\item Select columns of data for both samples
+\item Select ``Hypothesis test for $\mu_D = \mu_1 - \mu_2$"
+\item The null hypothesis should always be $H_0: \mu_D = 0$
+\item Enter the appropriate value for the alternative hypothesis.
+\item Click ``Compute!"
+\item The test statistic and p-value are found in ``T-Stat" and ``P-value"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Confidence intervals for matched pairs in StatCrunch}
+\begin{block}{}
+\begin{itemize}
+\large
+\item Stat $\to$ T Stats $\to$ Paired
+\item Select columns of data for both samples
+\item Select ``Confidence interval for $\mu_D = \mu_1 - \mu_2$"
+item Enter the appropriate confidence level.
+\begin{itemize}
+\item Remember, for one-sided tests, the confidence level is (1 -2$\alpha$)\%.
+\end{itemize}
+\item Click ``Compute!"
+\item The confidence interval bounds are found in ``L. Limit" and\\ ``U. Limit"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+\end{document}

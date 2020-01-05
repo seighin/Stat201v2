@@ -1,0 +1,174 @@
+\documentclass[xcolor=table, aspectratio=169, bigger]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+\usefonttheme[onlymath]{serif}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Chapter \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Midterm Review]{Stat 201: Statistics I\\Midterm Review}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../../images/metro_logo}}
+\date[10/20/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../../images/cc_big}}
+
+
+\begin{document}
+\frame{\titlepage}
+
+%%%%%%%%%%
+\begin{frame}{About the midterm exam}
+\begin{block}{}
+\begin{itemize}
+\item Available on MyStatLab following class on 10/21
+\item Due by end of day on 10/28
+\item 26 questions, 100 points, covering weeks 1 - 6
+\item Every question on exam has been a homework question, though the details will likely be different
+\item Time limit: 4 hours, must be completed in one sitting
+\item Can use any resource (book, notes, internet), except other people
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Week 1}
+\begin{block}{}
+\begin{itemize}
+\item Understand the potential for bias in studies
+\item Be able to calculate and understand percentages
+\item Know the difference between a parameter and a statistic
+\item Identify type of variable
+\begin{itemize}
+\item Quantitative: Discrete or continuous
+\item Categorical (Qualitative)
+\end{itemize}
+\item Identify levels of measurement
+\begin{itemize}
+\item Nominal
+\item Ordinal
+\item Interval
+\item Ratio
+\end{itemize}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Week 2}
+\begin{block}{}
+\begin{itemize}
+\item Calculate probabilities:
+\begin{itemize}
+\item From a proportion (i.e. 3 in 12)
+\item From a contingency table
+\item Complements
+\item Addition rule
+\item Multiplication rule
+\end{itemize}
+\item Identify disjoint events
+\item Identify independent and dependent events
+\item Know how to identify and calculate probabilities of false positives and false negatives
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Week 3}
+\begin{block}{}
+\begin{itemize}
+\item Calculate conditional probabilities
+\item Identify type of study
+\begin{itemize}
+\item Experimental
+\item Observational
+\end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+%%%%%%%%%%
+\begin{frame}{Week 4}
+\begin{block}{}
+\begin{itemize}
+\item Create a frequency table
+\item Create a histogram
+\item From histogram, identify normal or skewed distributions and outliers
+\item From a set of data, find (with proper units):
+\begin{itemize}
+\item Mean
+\item Median
+\item Mode
+\item Midrange
+\item Variance
+\item Standard deviation
+\item Range
+\end{itemize}
+\item Identify when to use mean/median
+\item Identify proper graphs from data
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%
+\begin{frame}{Week 5}
+\begin{block}{}
+\begin{itemize}
+\item Calculate 5 number summary and create corresponding boxplot
+\item Find the mean and standard deviation for an arbitrary probability distribution
+\item Find probabilities from an arbitrary probability distribution
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%%%%%%%%%%
+\begin{frame}{Week 6}
+\begin{block}{}
+\begin{itemize}
+\item Find probability of event from a binomial distribution
+\item Find probability from standard normal, $z$, distribution
+\item Find $z$-score which corresponds to given probability
+\item Find probability of event from a non-standard normal distribution
+\item Find value from non-standard normal distribution which corresponds to given probability
+\end{itemize}
+\end{block}
+\end{frame}
+
+\end{document}

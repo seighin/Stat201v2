@@ -42,7 +42,7 @@
 \title[Week 8]{Stat 201: Statistics I\\Week 10 }
 \author[M. Shyne]{}
 \institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
-\date[4/14/2019]{
+\date[11/17/2019]{
 \\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
 
 
@@ -203,11 +203,7 @@ It is usually not important which of the two populations is ``first", but it is 
 \begin{block}{}
 The null hypothesis for a two sample proportion test is \emph{always} proportion 1 is equal to proportion 2, or\\
 \smallskip
-\eq{H_0: p_1 = p_2}
-\pause\medskip
-However, the null hypothesis can be rewritten, without changing it's meaning, as\\
-\smallskip
-\eq{H_0: p_1 - p_2 = 0}
+\eq{H_0: p_1 = p_2 \txtor H_0: p_1 - p_2 = 0}
 \pause\medskip
 This second representation more accurately depicts how the hypothesis is conducted. In most circumstances, either can be used.
 \end{block}
@@ -747,7 +743,7 @@ Test whether cancer diagnosis has an effect on the screening test result at $\al
 \begin{frame}{Test for independence, example}
 \begin{exampleblock}{Example}
 \begin{itemize}
-\pause\item $H_0:$ Test result and cancer diagnosis are independent\\
+\item $H_0:$ Test result and cancer diagnosis are independent\\
 $H_a:$ Test result and cancer diagnosis are dependent (test result is associated with cancer diagnosis)
 \pause\item Requirements: The smallest expected count, for cancer and positive test, is 8.7 which is larger than 5
 \pause\item $\chi^2 = 596.47717$\\
@@ -781,7 +777,7 @@ Test whether texting or emailing while driving is associated with program attend
 \begin{frame}{Test for independence, example}
 \begin{exampleblock}{Example}
 \begin{itemize}
-\pause\item $H_0:$ Texting or emailing and program attendance are independent\\
+\item $H_0:$ Texting or emailing and program attendance are independent\\
 $H_a:$ Texting or emailing and program attendance are dependent (texting or emailing is associated with program attendance)
 \pause\item Requirements: We don't have expected counts yet, but the sample size is in the hundreds and no outcome appears very unlikely. We can confirm when we have expected counts.
 \pause\item $\chi^2 = 1.0435298$\\

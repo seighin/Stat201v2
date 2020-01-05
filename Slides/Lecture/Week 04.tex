@@ -42,8 +42,9 @@
 \title[Week 4]{Stat 201: Statistics I\\ Week 4 }
 \author[M. Shyne]{}
 \institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
-\date[2/10/2019]{
+\date[8/25/2019]{
 \\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+
 
 
 
@@ -405,7 +406,7 @@ Num tacos & Freq \\
 6 - 7 & 9 \\
 8 - 9 & 3 \\
 10 -11 & 3 \\
-(12 - 13 & 23 \\
+12 - 13 & 23 \\
 14 - 15 & 21 \\
 16 - 17 & 3 \\
 \end{tabular}
@@ -422,6 +423,14 @@ Num tacos & Freq \\
 \end{columns}
 \end{frame}
 
+%%%%%%%%%%
+\begin{frame}<handout:0>{Group work}
+\begin{block}{}
+\begin{itemize}
+\item Complete all parts of question 1.
+\end{itemize}
+\end{block}
+\end{frame}
 
 
 
@@ -750,7 +759,7 @@ s^2 &= \frac{\sum (x_i - \bar x)^2}{n-1}\\
 Recall, values that describe the properties of populations are called \bt{parameters} and values that describe samples are called \bt{statistics}. Notationally, in math formulas or when abbreviating, Greek letters are used to refer to parameters and Latin letters are used to refer to statistics.
 \pause
 \begin{center}
-\begin{tabular}{c |r l | c}
+\begin{tabular}{c |c l | c}
 Property & \multicolumn{2}{c|}{Parameter} & Statistic\\
 \hline
 Mean & $\mu$ & (mu) & $\bar x$\\
@@ -760,6 +769,243 @@ Standard deviation & $\sigma$ &(sigma) & $s$
 \end{center} 
 \end{block}
 \end{frame}
+
+%%%%%%%%%%
+\begin{frame}<handout:0>{Group work}
+\begin{block}{}
+\begin{itemize}
+\item Complete all parts of questions 2 and 3.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%
+% Section 4.3
+%
+\subsection{Summarizing Data with Graphs}
+
+%%%%%%%%%%
+\begin{frame}{Types of graphs}
+
+\begin{block}{}
+There are many types of graphs. Deciding which to use depends on the type of data involved and the message to be delivered.
+
+\begin{itemize}
+\item Continuous data:
+	\begin{itemize}
+	\item Histograms
+	\item Boxplots (to be covered later)
+	\end{itemize}
+\item Categorical data:
+	\begin{itemize}
+	\item Bar graphs
+	\item Pareto charts
+	\item Pie charts
+	\end{itemize}
+\item Paired data:
+	\begin{itemize}
+	\item Scatterplots
+	\item Time series
+	\end{itemize}
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Types of graphs: bar graph}
+\begin{block}{}
+A \bt{bar graph} displays frequencies of categorical data.
+\begin{itemize}
+\item The horizontal scale (x-axis) represents values of the categorical data.
+\item The vertical scale (y-axis) represents frequencies (or proportions or percentages).
+\item Often, but not always, bars are drawn with a gap between values.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Bar graph, example}
+\bigskip
+{\centering
+\includegraphics[width=4in]{../images/wk04_bar}
+\par}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Types of graphs: Pareto charts}
+
+\begin{block}{}
+A \bt{Pareto chart} is very similar to a bar graph, except the bars are arranged from most frequent to least, left to right.
+\begin{itemize}
+\item Can be confusing if used with ordinal data.
+\end{itemize} 
+\end{block}
+
+\bigskip
+{\centering
+\includegraphics[width=3in]{../images/wk04_pareto}
+\par}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Types of graphs: pie charts}
+
+\begin{block}{}
+A \bt{pie chart} displays relative frequencies of categorical data as ``slices" of a whole circle. The ``slices'' must be labelled or distinguished by color.
+\end{block}
+
+\bigskip
+{\centering
+\includegraphics[width=3.5in]{../images/wk04_pie}
+\par}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Types of graphs: scatterplots}
+\begin{block}{}
+A \bt{scatterplot} displays the relationship between paired quantitative variables.
+\begin{itemize}
+\item The x-axis represents one variable and the y-axis the other.
+\item A dot (or other symbol) for each data pair is placed at the appropriate x and y values.
+\end{itemize} 
+\end{block}
+
+\bigskip
+{\centering
+\includegraphics[width=2.9in]{../images/wk04_scatter}
+\par}
+
+\end{frame}
+
+\begin{frame}{Scatterplots and correlation}
+\begin{block}{}
+\large
+A question that can be answered with a scatterplot is whether there is an association or correlation between variables.  
+\end{block}
+
+\bigskip
+{\centering
+\includegraphics[width=4in]{../images/wk04_scatter_cor}
+\par}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Types of graphs: time series}
+\begin{block}{}
+A graph of paired quantitative data where one variable represents time is called a \bt{time series}. It is much like a scatterplot, except\ldots
+\begin{itemize}
+\item The x-axis always represents the time variable.
+\item Often a line is drawn between the points.
+\end{itemize}
+\end{block}
+\bigskip
+{\centering
+\includegraphics[width=3in]{../images/wk04_timeseries}
+\par}
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%
+\begin{frame}{Graphs that deceive}
+\begin{block}{}
+There are two types of bad graphs:
+\begin{itemize}
+\item Sometimes a graph is factually incorrect, whether because of errors in the data or a mistake in creating the graph. This is often difficult to detect without access to the original data.
+\item Sometimes graphs are technically correct, but designed to give a false impression of the data. Part of being a critical consumer of statistics is learning to recognize these misleading graphs.
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Misleading graphs: non-zero axis}
+\begin{block}{}
+A \bt{non-zero axis} is when one of the axis has a scale which does not include zero. This can make the relative sizes of the graph items to be distorted, especially in histograms or bar graphs.
+\end{block}
+\pause
+\begin{center}
+\includegraphics[width=3.5in]{../images/wk04_bad_nonzero}\par
+\end{center}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Non-zero axis, fixed}
+\begin{center}
+\includegraphics{../images/wk04_bad_nonzero_fixed} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Misleading graphs: pictographs}
+\begin{block}{}
+A \bt{pictograph} uses pictures or 3D objects to represent size, rather than simple bars or points. This can also distort relative sizes.
+\end{block}
+
+\pause
+\begin{exampleblock}{Example}
+Suppose we wanted to graph the difference in sales between two oil companies, one of which is has twice the sales as the other. If we created a pictograph, we would draw the height of the larger sales twice as tall as the other.
+\begin{itemize}
+\item If we used a pictures, such as a company logos, the larger would have 4 times the area.
+\item If we used a 3D object, such as an oil barrel, the larger would have 8 times the volume. 
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Pictograph, example}
+\begin{center}
+\includegraphics[width=4in]{../images/wk04_fastfood_pictograph}
+\end{center}
+\begin{block}{}
+Note that KFC has twice the sales of Starbucks and McDonald's is about 4 times Burger King, but both differences appear much greater.
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Misleading graphs: pie chart abuse}
+\begin{block}{}
+Since pie charts represent portions of a whole, the slices should always\\ add up to 100\%.
+\end{block}
+\pause
+\begin{center}
+\includegraphics[width=3in]{../images/wk04_bad_piechart}
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{No. Just no.}
+\begin{center}
+\includegraphics[width=3.25in]{../images/wk04_sb_piechart}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Gapminder}
+
+\url{https://www.gapminder.org/tools/}
+
+\begin{center}
+\includegraphics[width=4.5in]{../images/wk04_gapminder}
+\end{center}
+
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}<handout:0>{Group work}
+\begin{block}{}
+\begin{itemize}
+\item Complete all parts of question 4.
+\end{itemize}
+\end{block}
+\end{frame}
+
 
 
 \end{document}

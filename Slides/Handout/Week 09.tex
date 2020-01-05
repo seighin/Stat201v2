@@ -45,7 +45,6 @@
 \date[3/30/2019]{
 \\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
 
- 
 
 \begin{document}
 \frame{\titlepage}
@@ -84,7 +83,7 @@ Recall, the Central Limit Theorem states that, under the right conditions, a sam
 {\centering
 \includegraphics[width=4.5in]{../images/wk09_t_dist}
 \par}
-\end{frame}
+\end{frame} 
 
 %%%%%%%%%%
 \begin{frame}{Steps for a mean hypothesis test}
@@ -257,6 +256,28 @@ Assuming the null hypothesis is true, a test statistic representing the place of
 \end{block}
 \end{frame}
 
+%%%%%%%%%%
+\begin{frame}{Confidence intervals as hypothesis test}
+\begin{block}{}
+Recall, a confidence interval can be used as an equivalent to a hypothesis test with the area outside the interval as rejection region. For two-sided tests, given a $(1-\alpha)$\% confidence interval, reject the null if the null parameter is outside of the interval.  
+\end{block}
+\medskip
+{\centering
+\includegraphics[width=4.5in]{../images/wk09_two_ci}
+\par}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Confidence intervals for one-sided tests}
+\begin{block}{}
+However, for one-sided tests the rejection region is only on one side of the distribution. Thus, to get a one-sided rejection region with area $\alpha$ a $(1-2\alpha)$\% confidence interval is needed.
+\end{block}
+\medskip
+{\centering
+\includegraphics[width=4.5in]{../images/wk09_one_ci}
+\par}
+\end{frame}
+
 
 %%%%%%%%%%
 \begin{frame}{Independent vs. dependent samples}
@@ -265,7 +286,7 @@ Before conducting a test, it must be determined whether the samples are independ
 \pause\medskip
 \bt{Independent samples} are samples that come from distinct populations where the values from one sample do not affect the values from the other samples.\\
 \pause\medskip
-Conversely, \bt{dependent samples} are samples that often involve the same subjects with measurements taken at different times.
+Conversely, \bt{dependent samples} or \bt{paired samples} are samples that often involve the same subjects with measurements taken at different times.
 \end{block}
 \end{frame}
 
@@ -362,6 +383,22 @@ $H_a: \mu_1 > \mu_2$ or $H_a: \mu_1 - \mu_2 > 0$\\
 \end{exampleblock}
 \end{frame}
 
+%%%%%%%%%%
+%%%%%%%%%%
+\begin{frame}<handout:0>{Group work}
+\begin{block}{}
+\large
+\begin{itemize}
+\item Complete question 2.
+\end{itemize}
+\end{block}
+\end{frame}
+
+%
+% Section 9.3
+%
+\subsection{Hypothesis tests for paired samples}
+
 
 %%%%%%%%%%
 \begin{frame}{Hypothesis tests for dependent samples}
@@ -428,17 +465,17 @@ $H_a: \mu_D \ne 0$\\
 \begin{block}{}
 \large
 \begin{itemize}
-\item Complete questions 2 and 3.
+\item Complete question 3.
 \end{itemize}
 \end{block}
-\end{frame}
+\end{frame} 
 
 
 %%%%%%%%%%
 \begin{frame}{Teaching the null hypothesis}
 \smallskip
 {\centering
-\includegraphics[width=1.8 in]{../images/ch09_null_hypothesis}
+\includegraphics[width=1.8 in]{../images/wk09_null_hypothesis}
 \par}
 \end{frame}
 

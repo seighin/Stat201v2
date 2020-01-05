@@ -46,7 +46,6 @@
 \\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
 
 
-
 \begin{document}
 \frame{\titlepage}
 
@@ -154,14 +153,14 @@ What age is 2 standard deviations above the mean for this data? That is, what ag
 \end{frame}
 
 %%%%%%%%%%
-\begin{frame}{Unusual values}
+\begin{frame}{Unusual/significant values}
 
 {\centering
 \includegraphics[width=4.5in]{../images/ch03_unusual} \par
 }
 
 \begin{block}{}
-A value is called \bt{unusual} if it has a z-score $z$ such that $z< -2$ or $z > 2$. A value is \bt{ordinary} if $z$ is between $-2$ and $2$.
+A value is called \bt{unusual or significant} if it has a z-score $z$ such that $z< -2$ or $z > 2$. A value is \bt{ordinary} if $z$ is between $-2$ and $2$.
 \end{block}
 
 \pause
@@ -510,6 +509,7 @@ Thus, \\ \smallskip
 \end{block}
 \end{frame}
 
+%%%%%%%%%%
 \begin{frame}{Standard deviation, example}
 \begin{exampleblock}{Example}
 What is the standard deviation of number of tacos ordered at the restaurant?\\
@@ -526,6 +526,58 @@ $=$ & $1.41$\\
 \renewcommand{\arraystretch}{1.5}}
 \end{exampleblock}
 \end{frame}
+
+
+%%%%%%%%%%
+\begin{frame}{Unusual/significant events}
+\begin{block}{}
+If the probability of a random variable being equal to an event or takes a value more extreme than than the event is less than some threshold, usually 0.05, then the event is an \bt{unusual or significant event}.\\
+\medskip
+\pause
+That is, if $x$ is an extreme value if\\ \medskip
+\eq{P(X \le x) < 0.05 \txtor P(X \ge x) < 0.05}
+\medskip
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Unusual/significant events, example}
+\begin{exampleblock}{Example}
+Tom and Barbara collect eggs from their chickens everyday. The number of eggs they collect follows the following distribution,\\
+\smallskip
+{\centering
+\begin{tabular}{c|cccccccccc}
+Eggs ($x$) & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+\hline
+$P(x)$ & 0.01 & 0.03 & 0.1 & 0.2 & 0.3 & 0.2 & 0.1 & 0.04 & 0.02 & 0
+\end{tabular}\par
+}
+\medskip
+Is collecting 1 egg significantly low? Is collecting 7 eggs significantly high?
+\begin{itemize}
+\pause\item $P(X\le 1) = P(0) + P(1) = 0.04  < 0.05$\\
+\bt{Collecting 1 egg is significantly low.}
+\pause\item $P(X \ge 7) = P(7) + P(8) + P(9) = 0.06 \not < 0.025$\\
+\bt{Collecting 7 eggs is not significantly high.}
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Rare event rule}
+\begin{block}{}
+The \bt{rare event rule} says that if observed results are unusual, given an assumed probability distribution, then perhaps the assumption is wrong.
+\end{block}
+\pause
+\begin{exampleblock}{Example}
+Recall the example of flipping a coin 1000 times. Under the assumption the coin is fair ($P(H) = P(T) = 1/2$), the expected number of heads is 500.
+\begin{itemize}
+\pause\item Getting 523 heads is not unusual ($P(X \ge 523) = 0.077$). There is no reason to think the coin is not fair.
+\pause\item Getting 46 heads is unusual ($P(X \le 46) = 6.23 \times 10^{-222}$). We would be justified in questioning the assumption that the coin is fair.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
 
 
 %%%%%%%%%%

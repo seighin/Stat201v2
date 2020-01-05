@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage{shyne}
+
+% document format
+\topmargin 0in
+\oddsidemargin 0in
+\evensidemargin 0in
+\headheight 0in
+\headsep 0in
+\topskip 0in
+\textheight 9in
+\textwidth 6.5in
+\linespread{1.3}
+
+\begin{document}
+
+\begin{flushleft}
+\section*{Group Work - Week 9}
+
+\paragraph{1} The data file ``bears.csv" on D2L contains measurements of a random sample of bears from a national park. Harsh winters can be hard on a bear population, especially older bears. Park officials want to know if the mean bear age is greater than the usual mean of 55 months.
+
+\begin{enumalpha}
+\item What are the null and alternative hypotheses for a test on this claim? Is this a one-sided or two-sided test? Are the requirements of a t-test satisfied?\\
+\medskip
+$\bv{H_0: \mu = 55}$ \\
+$\bv{H_a: \mu > 55}$ \\
+\bt{One-sided test}\\
+\bt{All the requirements are satisfied (sample size is $\bv{> 30}$).}
+\vspace{1in}
+
+\item Using the data set, conduct a test at the $\alpha = 0.05$ level of significance of the claim that the bear population has a mean age greater than 55 months. Be sure to state your conclusion in the context of the question.\\
+\medskip
+
+$\bv{t = -2.502, \, p = 0.0155 < \alpha =0.05}$\bt{. Reject }$\bv{H_0.}$\\
+\bt{There is evidence that the bear population has a different mean age than 55 months.}
+\vspace{1in}
+
+
+
+\end{enumalpha}
+
+\newpage
+\paragraph{2} A manufacturer of flash drives wants to know if there is a difference in the reliability of their drives used in extreme conditions. A sample of 15 drives used in cold conditions ($< 32 $\textdegree F) had a mean lifespan of 41.9 months with a standard deviation of 6.3. A sample of 17 drives used in hot conditions ($> 99 $\textdegree F) had a mean lifespan of 38.4 months with a standard deviation of 5.9. Assume lifespans of flash drive are normally distributed.
+\begin{enumalpha}
+\item What are the null and alternative hypotheses for a test on this claim? Is this a one-sided or two-sided test? Are these independent or dependent samples? Are the requirements for a hypothesis test satisfied?\\
+\medskip
+$\bv{H_0: \mu_c = \mu_h \quad \text{\bt{or}} \quad \mu_c - \mu_h = 0}$ \\
+$\bv{H_a: \mu_c \ne \mu_h \quad \text{\bt{or}} \quad \mu_c - \mu_h \ne 0}$ \\
+\bt{Two-sided test, independent samples}\\
+\bt{All the requirements are satisfied (populations are normally distributed).}
+\vspace{1in}
+
+\item Conduct an hypothesis test at the $\alpha = 0.05$ level of significance. Be sure to state your conclusion in the context of the question.\\
+\medskip
+$\ds\bv{t = 1.616, \,p = 0.1171 > \alpha =0.05}$\bt{. Fail to reject }$\bv{H_0.}$\\
+\bt{There is not evidence the drives in extreme cold and extreme heat have different lifespans.}
+\vspace{1in}
+
+\item Calculate the appropriate confidence interval. Does the inference from the confidence interval match the results of the hypothesis test?\\
+\medskip
+\bt{Two-sided test: confidence level = }$\bv{(1-\alpha)\% = 95\%}$\\
+\bt{95\% CI = }$\bv{(-0.932, \, 7.932)}$\\
+\bt{Zero is in the confidence interval, thus there is not evidence that the means differ.}
+
+\end{enumalpha}
+
+\newpage
+\paragraph{3} Researchers are interested in whether meditation can lower blood pressure in people that have high blood pressure. They conduct a study on 45 patients with high blood pressure (systolic blood pressure $> 20$), measuring their systolic blood pressure at baseline and after 30 minutes of meditation. The file ``meditation\_bp.csv" on D2L contains the data.
+\begin{enumalpha}
+\item What are the null and alternative hypotheses for a test on this claim? Is this a one-sided or two-sided test? Are these independent or dependent samples? Are the requirements for a hypothesis test satisfied?\\
+\medskip
+$\bv{H_0: \mu_d = 0}$ \\
+$\bv{H_a: \mu_d > 0}$ \bt{, (if BP is lowered, then baseline - after = positive)}\\
+\bt{One-sided test, dependent or paired samples}\\
+\bt{All the requirements are satisfied (sample size is $\bv{> 30}$).}
+\vspace{1in}
+
+\item Conduct an hypothesis test at the $\alpha = 0.01$ level of significance. Be sure to state your conclusion in the context of the question.\\
+\medskip
+$\bv{t = -6.339, \, p < 0.0001 < \alpha =0.01}$\bt{. Reject }$\bv{H_0.}$\\
+\bt{There is evidence that systolic blood pressure is lower after 30 minutes of meditation.}
+\vspace{1in}
+\item Calculate the appropriate confidence interval. Does the inference from the confidence interval match the results of the hypothesis test?\\
+\medskip
+\bt{One-sided test: confidence level = }$\bv{(1-2\alpha)\% = 98\%}$\\
+\bt{98\% CI = }$\bv{(1.472, \, 3.283)}$\\
+\bt{Zero is not in the confidence interval and both limits are positive, thus there is evidence that the mean difference is positive, or that blood pressure dropped from baseline to after meditation.}
+
+\end{enumalpha}
+
+
+
+\end{flushleft}
+\end{document}

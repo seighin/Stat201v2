@@ -1,0 +1,101 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Week 6]{Stat 201: Statistics I\\ Week 6 StatCrunch}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[10/6/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+  
+
+\begin{document}
+
+\frame{\titlepage}
+
+%
+% Week 6
+%
+\setcounter{section}{5}
+\section{Binomial and Normal Distributions}
+
+%
+% Section 6.1
+%
+\subsection{Binomial Probability Distributions}
+
+%%%%%%%%%%
+\begin{frame}{Binomial probabilities in StatCrunch}
+\begin{block}{}
+\begin{itemize}
+\item Stat $\to$ Calculators $\to$ Binomial
+\item Enter sample size (``n") and probability (``p")
+\item Select appropriate comparison symbol and numeric value
+\item Click ``Compute" if necessary
+\item Probability will be displayed
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+% 
+% Section 6.2
+%
+\subsection{Normal Distributions}
+
+
+%%%%%%%%%%
+\begin{frame}{Probabilities of normal variables in StatCrunch}
+\begin{block}{}
+\begin{itemize}
+\item Stat $\to$ Calculators $\to$ Normal
+\item Default mean and standard deviation correspond to standard normal
+\item For nonstandard distributions, enter mean and standard deviation
+\item To find probabilities of ranges, select ``Between"
+\item To find a probability greater or less than a z-score, choose appropriate comparison symbol and enter z-score inside parentheses (i.e. ``$P(X \le 1) =\ldots$")
+\item To find a z-score corresponding to a probability, choose appropriate comparison symbol and enter probability \emph{outside} parentheses (i.e. ``$P(X \le \ldots) = 0.385$")
+\item Click ``Compute"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+
+\end{document}

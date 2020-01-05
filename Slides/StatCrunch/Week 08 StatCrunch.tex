@@ -1,0 +1,95 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Week 8]{Stat 201: Statistics I\\ Week 8 StatCrunch}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[11/3/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+  
+
+\begin{document}
+
+\frame{\titlepage}
+
+% Week 8
+\setcounter{section}{7}
+\section{Hypothesis Testing}
+
+%
+% Section 8.1
+%
+\subsection{More on Confidence Intervals}
+
+
+%%%%%%%%%%
+\begin{frame}{Find needed sample size for proportion with StatCrunch}
+\begin{block}{}
+\large
+\begin{itemize}
+\item Stat $\to$ Proportion Stats $\to$ One Sample $\to$ Width/Sample Size
+\item Enter ``Confidence level" if different than 0.95.
+\item Enter estimated $\hat p$ as ``Target Proportion" 
+\item Enter twice desired margin of error as ``Width"
+\item Click ``Compute!"
+\item The needed sample size is found in ``Sample size"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Find needed sample size for mean with StatCrunch}
+\begin{block}{}
+\begin{itemize}
+\item Stat $\to$ Z Stats $\to$ One Sample $\to$ Width/Sample Size
+\item Enter ``Confidence level" if different than 0.95.
+\item Enter estimated or given standard deviation as ``Std. dev."
+\item Enter twice desired margin of error as ``Width" 
+\item Click ``Compute!"
+\item The needed sample size is found in ``Sample size"
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Week 7]{Stat 201: Statistics I\\ Week 7 StatCrunch}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[10/13/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+  
+
+\begin{document}
+
+\frame{\titlepage}
+
+% Week 7
+\setcounter{section}{6}
+\section{Estimating Population Parameters}
+
+%
+% Section 7.2
+%
+\setcounter{subsection}{1}
+\subsection{Confidence Intervals}
+
+
+%%%%%%%%%%
+\begin{frame}{Confidence intervals of proportions in StatCrunch}
+\begin{block}{}
+\begin{itemize}
+\item Stat $\to$ Proportion Stats $\to$ One Sample $\to$ With Summary
+\item Enter ``\# of successes" and ``\# of observations"
+\item Select ``Confidence interval for p"
+\item Enter confidence level if different than 0.95.
+\item Click ``Compute!"
+\item The confidence interval is found in ``L. Limit" and ``U. Limit"
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Confidence intervals of means in StatCrunch}
+\begin{block}{}
+\large
+\begin{itemize}
+\item Stat $\to$ T Stats $\to$ One Sample $\to$ With Summary \bt{or} With Data
+\item For summary statistics (With Summary): Enter ``Sample mean", ``Sample std. dev." and ``Sample Size" (not degrees of freedom)
+\item For data set (With Data): Select column which contains data
+\item Select ``Confidence interval for $\mu$"
+\item Enter confidence level if different than 0.95.
+\item Click ``Compute!"
+\item The confidence interval is found in ``L. Limit" and ``U. Limit"
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+\end{document}

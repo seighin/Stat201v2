@@ -1,0 +1,76 @@
+\documentclass{article}
+
+\usepackage{shyne}
+
+% document format
+\topmargin 0in
+\oddsidemargin 0in
+\evensidemargin 0in
+\headheight 0in
+\headsep 0in
+\topskip 0in
+\textheight 9in
+\textwidth 6.5in
+\linespread{1.3}
+
+\begin{document}
+
+\begin{flushleft}
+\section*{Group Work - Week 7}
+\paragraph{1} In the wild, black cherry trees have a mean height of 82 feet with a standard deviation of 7.2 feet. 
+\begin{enumalpha}
+\item For samples drawn from this the wild population with sample sizes of 31, what is the mean and standard deviation of the sampling distribution of mean heights?\\
+\medskip
+
+\bt{$\bv{\mu_{\bar x} = \mu = 82}$}\\
+\smallskip
+\bt{$\ds \bv{\sigma_{\bar x} = \frac {\sigma} {\sqrt{n}} = \frac {7.2}{\sqrt{31}} = 1.29}$}
+
+\vspace{0.5in}
+\item Suppose data set \verb+trees.csv+ represented a sample of black cherry trees from a certain region. What is a 95\% confidence interval for the population mean height based on this sample? What is a 90\% confidence interval?\\
+\medskip 
+\bt{95\% Confidence interval: (73.66, 78.34)}\\
+\medskip 
+\bt{90\% Confidence interval: (74.06, 77.94)}\\
+
+\vspace{0.5in}
+
+\item Do either of the confidence intervals contain the population mean height listed above? What conclusions might we draw from the answer?\\
+\medskip
+
+
+\bt{Neither confidence interval contains 82 feet. Thus, it is likely that the sample was drawn from a population that is different than the general population of black cherry trees.}
+\end{enumalpha}
+
+\newpage
+
+\paragraph{2} From the 2015 Youth Risk Behavior Survey found that the probability of a teen driver texting or emailing while driving is 0.404. Assume this is the population proportion for teens in the U.S.
+
+\begin{enumalpha}
+\item For samples of U.S. teens with sample sizes of 50, what is the mean and standard deviation of the sampling distribution of the proportion of teens who text or email while driving?\\
+\medskip
+$\bv{p_{\hat p} = p = 0.404}$\\
+\smallskip
+$\ds \bv{\sigma_{\hat p} = \frac {\sigma}{\sqrt{n}} = \frac{pq}{\sqrt n} = \frac {0.404 \times 0.596}{\sqrt{50}} = 0.0341}$
+
+\vspace{0.5in}
+
+\item Suppose a survey of 50 teenagers from a single high school find the proportion of drivers who text or email while driving is 0.38. What is a 95\% confidence interval for the population proportion based on this sample? What is a 98\% confidence interval? \\
+\medskip
+\bt{\# of successes }$\bv{= n \hat p = 50 \times 0.38 = 19}$\\
+\medskip 
+\bt{95\% Confidence interval: (0.245, 0.515)}\\
+\medskip 
+\bt{98\% Confidence interval: (0.220, 0.540)}\\
+
+
+\vspace{0.5in}
+\item Do either of the confidence intervals contain the population proportion listed above? What conclusions might we draw from the answer?\\
+\medskip
+
+\bt{Both confidence intervals contain the population value of 0.404. Thus, there is no evidence that the students from this high school are different in terms of texting or emailing while driving from the general population.}
+
+\end{enumalpha}
+
+\end{flushleft}
+\end{document}

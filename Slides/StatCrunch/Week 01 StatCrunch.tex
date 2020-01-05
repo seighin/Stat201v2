@@ -1,0 +1,127 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\title[Week 1]{Stat 201: Statistics I\\ Week 1 StatCrunch}
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[8/25/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+  
+
+\begin{document}
+
+\frame{\titlepage}
+
+%
+% Week 1
+%
+\section{Introduction to MyStatLab and StatCrunch}
+
+%
+% Section 1.1
+%
+\subsection{Accessing MyStatLab}
+
+%%%%%%%%%%
+\begin{frame}{Accessing MyStatLab}
+\begin{block}{}
+\begin{itemize}
+\item From D2L: Select ``MyStatLab" folder from the Content Browser
+\item Click on the ``Pearson MyLab and Mastering" link
+\item Click on the orange ``Open MyLab and Mastering" button
+\item If this is the first time accessing MyStatLab, you will be asked to enter information necessary to gain access. Follow the instruction from the "Student Registration Handout".
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Using MyStatLab}
+\begin{block}{}
+You can navigate to different sections of MyStatLab using the menu on the left side.
+\begin{itemize}
+\item Homework, quizzes and exams will be found in ``Assignments"
+\item You can track your progress in ``Gradebook"
+\item The online version of the textbook is found in ``eText"
+\item The ``Study Plan" and ``Chapter Contents" sections contain additional material you might find useful. Nothing from these sections is required.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+
+% Section 2.3
+\subsection{Accessing and loading data into StatCrunch}
+
+
+%%%%%%%%%%
+\begin{frame}{Accessing StatCrunch}
+\begin{block}{}
+Most of the time you will access StatCrunch directly from your homework (or quiz or exam). However, for in-class work or if you want to use it on your own, StatCrunch can be accessed from MyStatLab.
+\begin{itemize}
+\item Selecting ``StatCrunch" from the left-hand menu
+\item Click the ``StatCrunch website" link 
+\item Click ``Open StatCrunch" from the menu along the top of the page
+\end{itemize}
+StatCrunch presents a spreadsheet like page where data can be entered or loaded. The various statistical functions can be found from the menu along the top.
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Loading data into StatCrunch}
+\begin{block}{}
+When working on assignments, data will be loaded automatically into StatCrunch. However, for in-class work, we will need to load data sets from D2L into StatCrunch ourselves.
+\begin{itemize}
+\item From D2L, select the ``Data" folder in the ``Content Browser".
+\item Find the data file to be used. Either, click the down arrow next to the file name and select download, \bt{or} click on the file name and then click on either download button.
+\item Do \bt{not} try to open the file from either browser or the download folder on your computer. This will open the file in Excel, which is not what we want.
+\item From StatCrunch: Select Data $>$ Load $>$ From file $>$ on my computer
+\item Click ``Choose file" and select the file from your hard drive (it will probably be in the downloads folder). 
+\item Scroll to the bottom of the load data page (everything else on the page can be ignored). Click ``Load File"
+\item A new StatCrunch tab will open with the data loaded.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+\end{document}
