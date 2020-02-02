@@ -1,0 +1,163 @@
+\documentclass[xcolor=table, aspectratio=169, bigger]{beamer}
+
+\usepackage{shyne}
+
+% Theme settings
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+\usefonttheme{structurebold}
+\usefonttheme[onlymath]{serif}
+
+\AtBeginSection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Week \thesection\\  \secname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+\AtBeginSubsection[]
+{ 	\begin{frame}{}
+
+	{
+	\usebeamerfont{frametitle}
+	\begin{beamercolorbox}
+		[wd={\textwidth}, center, sep=.2in, rounded=true, shadow=true]
+		{frametitle}
+	Section \thesection .\thesubsection\\  \subsecname 
+	\end{beamercolorbox}
+	}
+	
+	\end{frame} 
+}
+
+
+\title[Week 3]{Stat 201: Statistics I\\ Week 3 }
+\author[M. Shyne]{}
+\institute[Metro State]{\includegraphics[width=1.75in]{../images/metro_logo}}
+\date[1/6/2019]{
+\\ \bigskip \bigskip \includegraphics[width=.4in]{../images/cc_big}}
+
+
+\begin{document}
+ 
+\frame{\titlepage}
+
+%
+% Week 3
+%
+\setcounter{section}{2}
+\section{More Probability, Sampling methods and Types of Studies}
+
+%
+% Section 3.1
+%
+\subsection{Conditional Probability and Bayes Theorem}
+
+
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem}
+
+\begin{block}{}
+Consider again the multiplication rule,\\ \smallskip
+\eq{P(A \text{ and } B) = P(A) \times P(B \mid A)} \medskip
+\pause
+It could also be expressed with equal validity as,\\ \smallskip
+\eq{P(A \text{ and } B) = P(B) \times P(A \mid B)} \medskip
+\pause
+With some algebra, \\ \smallskip
+\eq{P(B) \times P(A \mid B) = P(A) \times P(B \mid A)} \smallskip
+\pause
+\eq{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)}}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, cont.}
+
+\begin{block}{}
+\eq{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)}} \medskip
+
+This equation is known as \bt{Bayes Theorem}.
+\end{block}
+
+\begin{exampleblock}{}
+Thomas Bayes was a Presbyterian minister and amateur mathematician who lived 1701 - 1761. The early form of the theorem that bears his name was published posthumously, though it has been refined by many people since..
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, example}
+\begin{exampleblock}{Example}
+According to the Minnesota Department of Public Safety 2017 statistics, there were 78,465 motor vehicle crashes, 341 of them involving fatalities. Seat belts were used in 54.1\% of the fatal crashes (in 13.6\% of fatal crashes, seat belt use was unknown). Overall, the rate of seat belt use in MN was 92.0\%. \\ 
+\medskip
+
+What is the probability a motor vehicle crash with occupants wearing seat belts results in deaths?
+
+\begin{itemize}
+\pause\item $A$ = A crash results in fatalities. $\ds P(A) = \frac{341}{78465} = 0.0043$
+
+\pause\item $B$ = Car occupants use seat belts. $P(B) = 0.92$
+
+\pause\item $B \mid A$ = Occupants used seat belts given the crash involved fatalities.\\ \smallskip
+$P(B \mid A) = 0.541$
+\end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, example}
+\begin{exampleblock}{Example}
+What is the probability a motor vehicle crash with occupants wearing seat belts results in deaths?\\ \smallskip
+\eq{P(A) = 0.0043 \qquad P(B) = 0.92 \qquad P(B \mid A) = 0.541} \smallskip
+
+\begin{itemize}
+\pause\item Find $P(A \mid B)$ \\ \smallskip
+\pause\eq{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)}} \medskip
+\pause\eq{P(A \mid B) = \frac{0.0043 \times 0.541}{0.92} = 0.0025}
+\end{itemize}
+
+\end{exampleblock}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Bayes Theorem, interpretation}
+\begin{block}{}
+There are two main ways to think about Bayes Theorem:
+
+\begin{itemize}
+\pause\item Update a probability with new information.\\ \smallskip
+If you know a car is involved in a crash, the probability it resulted in a death is 0.0043. However, if you further learn that the occupants were wearing seat belts, that probability drops to 0.0025. If you learn more information, such as the age of the driver, you could further refine the probability of fatalities.
+
+\pause\item Reverse a known conditional probability.\\ \smallskip
+If we know the probability of seat belt use given the crash involved a fatality (and the marginal probabilities of fatal crashes and seat belt use overall), we can figure out the probability of fatalities given seat belt use.
+\end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%
+\begin{frame}{Why learn about Bayes Theorem?}
+\begin{block}{}
+\begin{itemize}
+\item In simple cases, probabilities might be easier to calculate using tree diagrams. However, in more complicated scenarios, Bayes Theorem can become an important tool.
+
+\pause\item There are two main schools of statistics. This class, and undergraduate statistics in general, utilize \bt{frequentist} statistics. A more recent and more complicated approach is known as \bt{bayesian} statistics, which is based, as you might expect, on Bayes Theorem. 
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+
+
+\end{document}

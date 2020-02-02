@@ -34,7 +34,7 @@ Diagnosis & Positive & Negative\\
 \item What is the sensitivity of the screening test? That is, what is $P(\text{positive test} \mid \text{has cancer})$?\\
 \medskip
 $\ds \bv{P(\text{positive test} \mid \text{has cancer}) = \frac{68}{68+20} = 0.773}$
-\vspace{1.75in}
+\vspace{.75in}
 
 \item What is the probability of having cancer if the screen test is positive?\\
 \medskip
@@ -42,6 +42,12 @@ $\ds \bv{P(\text{has cancer} \mid \text{positive test}) = \frac{68}{68+1192} = 0
 \bt{This is known as the positive predictive value (PPV) of the test.}
 \vspace{.75in}
 
+\item Suppose you learn that 12\% of people age 35 - 50 smoke and that 79\% of lung cancer patients are (or were) smokers. Smoking is independent of the screening test results. What is the probability of having cancer if a patients has a positive screening test and is a smoker?\\
+\medskip
+$\bv A$\bt{ = Have cancer after a positive test, }$\bv{P(A) = 0.054}$\\
+$\bv B$\bt{ = Smoker, }$\bv{P(B) = 0.12}$\\
+$\bv{B \mid A}$\bt{ = smoker given has cancer, }$\bv{P(B \mid A) = 0.79}$\\ \medskip
+$\ds \bv{P(A \mid B) = \frac{P(A) \times P(B \mid A)}{P(B)} = \frac{0.054 \times 0.79}{0.12} = 0.356}$
 \end{enumalpha}
 
 \newpage
